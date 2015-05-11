@@ -1,0 +1,5 @@
+{
+	"require": {
+		"omise/omise-php": "dev-master"
+	}
+}
