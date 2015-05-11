@@ -1,16 +1,16 @@
-a 							{ color: #60c0e1; text-decoration: none; outline: 0; }
-.success 					{ background: #80D700 !important; color: #fff !important;  }
+a                           { color: #60c0e1; text-decoration: none; outline: 0; }
+.success                    { background: #80D700 !important; color: #fff !important;  }
 
 /* Checkout Form */
-form 						{ margin-top: 10px; text-shadow: 1px 1px #fff; background: #f5f5f5; padding: 10px 20px 20px; font-size: 14px; border-radius: 4px; }
-form > div > div > div 		{ padding: 8px 0; }
-form input 					{ margin-left: 8px; padding: 8px 16px; border: 1px solid #eee; /*font-size: 13px;*/ }
-form input[type=submit] 	{ margin-left: 0px; margin-top: 20px; padding: 10px 16px; color: #fff; border-radius: 3px; background: #3d3d3d; }
+form                        { margin-top: 10px; text-shadow: 1px 1px #fff; background: #f5f5f5; padding: 10px 20px 20px; font-size: 14px; border-radius: 4px; }
+form > div > div > div      { padding: 8px 0; }
+form input                  { margin-left: 8px; padding: 8px 16px; border: 1px solid #eee; /*font-size: 13px;*/ }
+form input[type=submit]     { margin-left: 0px; margin-top: 20px; padding: 10px 16px; color: #fff; border-radius: 3px; background: #3d3d3d; }
 
-form #token_errors 			{ text-shadow: 0 0; background: #fff; color: #3d3d3d; border-radius: 4px; padding: 10px; font-size: 15px; margin-bottom: 8px; }
+form #token_errors          { text-shadow: 0 0; background: #fff; color: #3d3d3d; border-radius: 4px; padding: 10px; font-size: 15px; margin-bottom: 8px; }
 
-form .col-xs-12 			{ position: relative; }
-.omise-circle 				{ position: absolute; right: 55px; top: 50%; margin-top: -70px; width: 140px; height: 140px; font-size: 20px; display: inline-block; line-height: normal; border: 5px solid #60c0e1; border-radius: 100%; padding: 0; font-style: normal; font-weight: 100; }
+form .col-xs-12             { position: relative; }
+.omise-circle               { position: absolute; right: 55px; top: 50%; margin-top: -70px; width: 140px; height: 140px; font-size: 20px; display: inline-block; line-height: normal; border: 5px solid #60c0e1; border-radius: 100%; padding: 0; font-style: normal; font-weight: 100; }
 
-footer 						{ border-top: 1px solid #ddd; padding-top: 20px; margin-top: 150px; }
-footer li 					{ font-size: 16px; margin-left: 40px; }
+footer                      { border-top: 1px solid #ddd; padding-top: 20px; margin-top: 150px; }
+footer li                   { font-size: 16px; margin-left: 40px; }
