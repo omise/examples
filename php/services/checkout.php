@@ -25,9 +25,11 @@ if (isset($_POST['omise_token'])) {
         echo "</pre>";
     } catch (OmiseException $e) {
         echo '<a href="../" style="display:block; margin-top: 20px;">back</a>';
+        echo '<h3>Charged status.</h3>';
         echo '<div class="alert alert-danger">Error <strong>'.$e->getMessage().'</strong><br/>Please try again.</div>';
     }   
 } else {
+    echo '<a href="../" style="display:block; margin-top: 20px;">back</a>';
     echo '<div class="alert alert-warning">Not support GET request.</div>';
 }
 ?>

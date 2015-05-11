@@ -16,7 +16,9 @@ try {
     print_r($balance);
     echo "</pre>";
 } catch (Exception $e) {
-    echo 'Error <strong>'.$e->getMessage().'</strong><br/>Please try again.';
+    echo '<a href="../" style="display:block; margin-top: 20px;">back</a>';
+    echo "<h3>Balance Object Status.</h3>";
+    echo '<div class="alert alert-danger">Error <strong>'.$e->getMessage().'</strong><br/>Please try again.</div>';
 }
 ?>
 
