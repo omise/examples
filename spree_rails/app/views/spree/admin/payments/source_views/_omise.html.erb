@@ -1,0 +1,6 @@
+<% if @payment.log_entries.any? %>
+  <h3>Omise Response Debugging Details</h3>
+  <% @payment.log_entries.each do |log_entry| %>
+    <pre><%= pp log_entry.details %></pre>
+  <% end %>
+<% end %>
