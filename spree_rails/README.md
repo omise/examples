@@ -12,8 +12,7 @@ Support in mainstream ActiveMerchant is currently under Pull Request review.
 
 1. Create a token using Omise.js and charge the card using token.
 2. Use token to save customer on database and charge the card anytime (Spree Card Profile)
-3. Full Void
-4. Partial Refunds
+3. Full or Partial Refunds
 
 ### Setup
 
