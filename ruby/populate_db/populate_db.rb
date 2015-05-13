@@ -31,13 +31,11 @@ Omise.api_key   = options[:secret_key]
 Omise.api_url   = "http://api.lvh.me:3000"
 Omise.vault_url = "http://vault.lvh.me:4500"
 
-@customer_name = 2.words.map(&:capitalize).join(" ")
-puts "CUSTOMER NAME: #{@customer_name}"
-
 def create_token
+  name = 2.words.map(&:capitalize).join(" ")
   Omise::Token.create(
     card: {
-      name: @customer_name,
+      name: name,
       number: TEST_CARDS.sample,
       expiration_month: (rand(12) + 1).to_s,
       expiration_year: (Time.now.strftime("%Y").to_i + rand(1..10)).to_s,
@@ -57,9 +55,10 @@ end
 
 # Create a customer
 def create_customer(token)
+  name = 2.words.map(&:capitalize).join(" ")
   Omise::Customer.create(
-    email: "#{@customer_name.downcase.split.join(".")}@example.com",
-    description: @customer_name,
+    email: "#{name.downcase.split.join(".")}@example.com",
+    description: name,
     card: token.id
   )
 end
