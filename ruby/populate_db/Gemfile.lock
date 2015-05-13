@@ -1,0 +1,18 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    mime-types (2.5)
+    netrc (0.10.3)
+    omise (0.1.1)
+      rest-client (~> 1.7.2)
+    rest-client (1.7.3)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
+    word_salad (2.0.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  omise
+  word_salad
