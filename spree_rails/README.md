@@ -4,7 +4,7 @@ This a Spree Rails application using Omise ActiveMerchant gateway plugin.
 
 Tested with Spree Stable and ActiveMerchant 1.47.0, which uses our Omise branch: [omise-1.47.0](https://github.com/omise/active_merchant/tree/omise-1.47.0) 
 
-We plan to send a PR to mainstream ActiveMerchant at some point.
+Support in mainstream ActiveMerchant is currently under Pull Request review.
 
 ## Instructions
 
@@ -12,8 +12,7 @@ We plan to send a PR to mainstream ActiveMerchant at some point.
 
 1. Create a token using Omise.js and charge the card using token.
 2. Use token to save customer on database and charge the card anytime (Spree Card Profile)
-3. Full Void
-4. Partial Refunds
+3. Full or Partial Refunds
 
 ### Setup
 
