@@ -98,30 +98,24 @@ puts "#### Start populating ####"
 threads = []
 
 options[:number].times.each do
-  threads << Thread.new do
-    puts "Create a Charge ..."
-    create_charge(create_token)
+  puts "Create a Charge ..."
+  create_charge(create_token)
 
-    puts "Create a Customer ..."
-    create_customer(create_token)
+  puts "Create a Customer ..."
+  create_customer(create_token)
 
-    puts "Create an authorized Charge ..."
-    auth_charge = create_authorized_charge(create_token)
+  puts "Create an authorized Charge ..."
+  auth_charge = create_authorized_charge(create_token)
 
-    puts "Create a Refund for '#{auth_charge.id}' ..."
-    create_refund(auth_charge)
+  puts "Create a Refund for '#{auth_charge.id}' ..."
+  create_refund(auth_charge)
 
-    puts "Update a Charge ..."
-    charge = Omise::Charge.retrieve(Omise::Charge.list.to_a.sample.id)
-    update_charge(charge)
+  puts "Update a Charge ..."
+  charge = Omise::Charge.retrieve(Omise::Charge.list.to_a.sample.id)
+  update_charge(charge)
 
-    puts "Create a Transfer ..."
-    create_transfer(Omise::Balance.retrieve)
-  end
+  puts "Create a Transfer ..."
+  create_transfer(Omise::Balance.retrieve)
 end
 
-# Wait for threads to finish up
-threads.each do |t|
-  t.join
-end
 
