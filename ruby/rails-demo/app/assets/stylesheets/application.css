@@ -13,3 +13,22 @@
  *= require_tree .
  *= require_self
  */
+
+.content                    {margin: auto; width: 520px;}
+a                           { color: #60c0e1; text-decoration: none; outline: 0; }
+.success                    { background: #80D700 !important; color: #fff !important;  }
+.logo                       { margin: auto; }
+.logo img                   { margin: auto; display: block; width: 480px }
+/* Checkout Form */
+form                        { width: 440px; margin: 10px auto auto auto; text-shadow: 1px 1px #fff; background: #f5f5f5; padding: 10px 20px 20px; font-size: 14px; border-radius: 4px; }
+form > div > div > div      { padding: 8px 0; }
+form label                  { width: 100px; display: inline-block; }
+form input                  { margin-left: 8px; padding: 8px 16px; border: 1px solid #eee; /*font-size: 13px;*/ }
+form input[type=submit]     { margin-left: 0px; margin-top: 20px; padding: 10px 16px; color: #fff; border-radius: 3px; background: #3d3d3d; }
+
+form #token_errors          { text-shadow: 0 0; background: #fff; color: #3d3d3d; border-radius: 4px; padding: 10px; font-size: 15px; margin-bottom: 8px; }
+
+form .col-xs-12             { position: relative; }
+
+footer                      { border-top: 1px solid #ddd; padding-top: 20px; margin-top: 150px; }
+footer li                   { font-size: 16px; margin-left: 40px; }

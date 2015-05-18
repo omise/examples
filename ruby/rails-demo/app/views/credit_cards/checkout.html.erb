@@ -1,0 +1,17 @@
+<h3>Charge Results</h3>
+<ul>
+  <li>Amount: <%= (@charge.amount/100.0).round(2) %> <%= @charge.currency %></li>
+  <li>Authorized: <%= @charge.authorized %></li>
+  <li>Captured: <%= @charge.captured %></li>
+</ul>
+
+<h3>Card Details</h3>
+<ul>
+  <li>Omise ID: <%= @charge.card.card_data["id"] %></li>
+  <li>Fingerprint: <%= @charge.card.card_data["fingerprint"] %></li>
+  <li>Name: <%= @charge.card.card_data["name"] %></li>
+  <li>Last Digits: <%= @charge.card.card_data["last_digits"] %></li>
+  <li>Brand: <%= @charge.card.card_data["brand"] %></li>
+  <li>Country: <%= @charge.card.card_data["country"] %></li>
+  <li>Type: <%= @charge.card.card_data["financing"] %></li>
+</ul>

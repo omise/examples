@@ -1,0 +1,19 @@
+<%= form_tag(credit_cards_checkout_path, method: "post", id: "checkout") do %>
+  <div id="token_errors" class=""></div>
+  <input type="hidden" name="omise_token">
+  <div class="row">
+    <div class="col-xs-12">
+      <div><label>Card Name</label><input type="text" data-omise="name" value="Omise Team"></div>
+      <div><label>Card Number</label><input type="text" data-omise="number" value="4242424242424242"></div>
+      <div><label>Expire Date</label>
+        <input type="text" data-omise="expiration_month" size="2" value="11"> /
+        <input type="text" data-omise="expiration_year" size="6" value="2020">
+      </div>
+      <div><label>Security Code</label><input type="text" data-omise="security_code" size="8" value="123"></div>
+      <span class="omise-circle" style=""></span>
+    </div>
+  </div>
+  <%= submit_tag "Checkout", id: "create_token" %>
+<% end %>
+
+<%= javascript_include_tag 'omise' %>

@@ -19,14 +19,14 @@ ActiveRecord::Schema.define(version: 20150516150330) do
 
   create_table "cards", force: :cascade do |t|
     t.hstore   "card_data"
-    t.integer  "token_id"
+    t.integer  "charge_id"
     t.integer  "customer_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
+  add_index "cards", ["charge_id"], name: "index_cards_on_charge_id", using: :btree
   add_index "cards", ["customer_id"], name: "index_cards_on_customer_id", using: :btree
-  add_index "cards", ["token_id"], name: "index_cards_on_token_id", using: :btree
 
   create_table "charges", force: :cascade do |t|
     t.string   "remote_id"
@@ -56,12 +56,9 @@ ActiveRecord::Schema.define(version: 20150516150330) do
   end
 
   create_table "tokens", force: :cascade do |t|
-    t.string   "remote_id"
-    t.boolean  "used",       default: false
-    t.boolean  "livemode",   default: false
-    t.string   "location"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
