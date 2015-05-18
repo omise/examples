@@ -1,0 +1,18 @@
+== README
+
+## Rails demo using Omise Payment Gateway
+
+Simple rails application that implements creadit card checkout with Omise.
+Use this example application as a base for your rails web applications.
+
+## Flow
+
+In the front end it sends card via omise.js, and on the backend it makes the charge.
+The charge is stored on charges model.
+
+## Features
+
+- Customer (Save card to a customer profile)
+- Add Refunds (Full or Partial)
+- Add transfer (Withdrawing funds)
+- Disputes
