@@ -7,8 +7,45 @@ So, all of files in this directory will show you about the best pratices that yo
 - PHP 5.3 and above.
 - Built-in libcurl support.
 
+## Installation
+For run a test in this example, you need to install `omise-php` library before.
+
+### Using Composer
+You can install the library via [Composer](https://getcomposer.org/). If you don't already have Composer installed, first install it by following one of these instructions depends on your OS of choice:
+* [Composer installation instruction for Windows](https://getcomposer.org/doc/00-intro.md#installation-windows)
+* [Composer installation instruction for Mac OS X and Linux](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
+
+After composer is installed, Then run the following command to install the Omise-PHP library:
+
+```
+php composer.phar install
+```
+
+Please see configuration section below for configuring your Omise Keys.
+
+### Manually
+
+If you're not using Composer, you can also clone `omise/omise-php` repository into the directory of sample code that you just installed this repository:
+
+```
+git clone https://github.com/omise/omise-php
+```
+
+However, using Composer is recommended as you can easily keep the library up-to-date. After cloning the repository, you need to replace line 3 in `config.php` from
+```php
+3: require_once 'vendor/autoload.php';
+```
+
+to
+
+```php
+3: require_once 'omise-php/lib/Omise.php';
+```
+
+Please see configuration section below for configuring your Omise Keys.
+
 ## Configuration
-First thing that you need to concentrate after you downloaded this repository and unzip it to your local machine is **configuring** your Omise Keys.  
+After you installed `omise-php` library already. Next, you need to **configuring** your Omise Keys.  
 So, we have 2 files that you need to change:
 - `examples/php`/index.php
 - `examples/php`/config.php 
