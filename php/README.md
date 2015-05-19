@@ -1,16 +1,16 @@
 # OMISE-PHP Sample Code
-**[OMISE-PHP](https://github.com/omise/omise-php)** is a library for connect with Omise Payment Gateway services (see more https://docs.omise.co/).
+**[OMISE-PHP](https://github.com/omise/omise-php)** is a library for connecting with Omise Payment Gateway services (see more https://docs.omise.co/).
 
-So, all of files in this directory will show you about the best pratices that you should do when implementing  **omise-php** into your project.
+All files in this directory will show you about the best pratices that you should do when implementing  **omise-php** into your project.
 
 ## Requirements
 - PHP 5.3 and above.
 - Built-in libcurl support.
 
 ## Installation
-For run a test in this example, you need to install `omise-php` library before.
+For running this example, you need to install `omise-php` library before. It can be done by two different methods:
 
-### Using Composer
+### 1. Using Composer
 You can install the library via [Composer](https://getcomposer.org/). If you don't already have Composer installed, first install it by following one of these instructions depends on your OS of choice:
 * [Composer installation instruction for Windows](https://getcomposer.org/doc/00-intro.md#installation-windows)
 * [Composer installation instruction for Mac OS X and Linux](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
@@ -23,7 +23,7 @@ php composer.phar install
 
 Please see configuration section below for configuring your Omise Keys.
 
-### Manually
+### 2. Manually
 
 If you're not using Composer, you can also clone `omise/omise-php` repository into the directory of sample code that you just installed this repository:
 
@@ -45,7 +45,7 @@ to
 Please see configuration section below for configuring your Omise Keys.
 
 ## Configuration
-After you installed `omise-php` library already. Next, you need to **configuring** your Omise Keys.  
+After you installed `omise-php` library already. Next, you need to **configure** your Omise Keys.  
 So, we have 2 files that you need to change:
 - `examples/php`/index.php
 - `examples/php`/config.php 
