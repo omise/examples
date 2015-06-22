@@ -12,7 +12,7 @@
                 <div class="col-xs-12">
                     <p>
                         <a href="https://github.com/omise/omise-php" target="_blank"><strong>OMISE-PHP</strong></a> is a library for connect with Omise Payment Gateway services (see more <a href="https://docs.omise.co/" target="_blank">https://docs.omise.co/</a>).
-                        <br/>So, all of files in this directory will show you about the best pratices that you should do when implementing **omise-php** into your project.
+                        <br/>So, all of files in this directory will show you about the best pratices that you should do when implementing <strong>omise-php</strong> into your project.
                     </p>
                 </div> <!-- /END .col-xs-12 -->
             </div> <!-- /END .row -->
@@ -130,8 +130,9 @@
             
             <h2 style="margin-top: 40px;">More practice...</h2>
             <ul>
-                <li><a href="services/account.php">Retrieve Account</a></li>
-                <li><a href="services/balance.php">Retrieve Balance</a></li>
+                <li><a href="services/account.php">Retrieve the account</a> (see more from <a target="_blank" href="https://docs.omise.co/api/account/#accounts-retrieve">https://docs.omise.co/api/account/#accounts-retrieve</a>)</li>
+                <li><a href="services/balance.php">Retrieve the balance</a> (see more from <a target="_blank" href="https://docs.omise.co/api/balance/#balances-retrieve">https://docs.omise.co/api/balance/#balances-retrieve</a>)</li>
+                <li><a href="services/charge.php">List all charges</a> (see more from <a target="_blank" href="https://docs.omise.co/api/charges/#charges-list">https://docs.omise.co/api/charges/#charges-list</a>)</li>
             </ul>
             
             <!-- Footer Credit -->
@@ -143,10 +144,10 @@
 
                     <div class="col-xs-10 text-right">
                         <ul class="list-inline">
-                            <li><a href="https://www.omise.co/about.html">About</a></li>
-                            <li><a href="https://www.omise.co/blog">Blog</a></li>
-                            <li><a href="https://www.omise.co/terms.html">Terms &amp; conditions</a></li>
-                            <li><a href="https://www.omise.co/privacy.html">Privacy policy</a></li>
+                            <li><a target="_blank" href="https://www.omise.co/about.html">About</a></li>
+                            <li><a target="_blank" href="https://www.omise.co/blog">Blog</a></li>
+                            <li><a target="_blank" href="https://www.omise.co/terms.html">Terms &amp; conditions</a></li>
+                            <li><a target="_blank" href="https://www.omise.co/privacy.html">Privacy policy</a></li>
                             <li><a target="_blank" href="https://www.facebook.com/Omiseco">Facebook</a></li>
                             <li><a target="_blank" href="https://twitter.com/omise">Twitter</a></li>
                             <li><a target="_blank" href="https://www.linkedin.com/company/omise-co-ltd-">Linkedin</a></li>
