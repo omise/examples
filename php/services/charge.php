@@ -20,7 +20,7 @@ try {
     echo "</pre>";
 } catch (Exception $e) {
     echo '<a href="../" style="display:block; margin-top: 20px;">back</a>';
-    echo "<h3>Balance Object Status.</h3>";
+    echo "<h3>Charge Object Status.</h3>";
     echo '<div class="alert alert-danger">Error <strong>'.$e->getMessage().'</strong><br/>Please try again.</div>';
 }
 ?>
