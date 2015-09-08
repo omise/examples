@@ -12,5 +12,6 @@ form #token_errors          { text-shadow: 0 0; background: #fff; color: #3d3d3d
 form .col-xs-12             { position: relative; }
 .omise-circle               { position: absolute; right: 55px; top: 50%; margin-top: -70px; width: 140px; height: 140px; font-size: 20px; display: inline-block; line-height: normal; border: 5px solid #60c0e1; border-radius: 100%; padding: 0; font-style: normal; font-weight: 100; }
 
-footer                      { border-top: 1px solid #ddd; padding-top: 20px; margin-top: 150px; }
+footer                      { border-top: 1px solid #ddd; padding: 20px 0 20px; margin-top: 150px; }
+footer ul                   { margin-bottom: 0; padding-top: 10px; }
 footer li                   { font-size: 16px; margin-left: 40px; }
