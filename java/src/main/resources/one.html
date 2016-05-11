@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Omise Example Jetty App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://cdn.omise.co/omise.js.gz"></script>
+    <script>
+        $(function() {
+            $('#register_form').submit(function(e) {
+                if ($('#card_token').val() != '') {
+                    return true; // already tokenized, ready to send.
+                } else {
+                    e.preventDefault();
+                }
+
+                Omise.setPublicKey('pkey_test_52d6po3fvio2w6tefpb');
+                var card = {
+                    "name":             $('#name').val(),
+                    "number":           $('#number').val(),
+                    "expiration_month": $('#expiration_month').val(),
+                    "expiration_year":  $('#expiration_year').val(),
+                    "security_code":    $('#security_code').val()
+                };
+
+                Omise.createToken('card', card, function(status, response) {
+                    if (status != 200) {
+                        alert(response.message);
+                        return false;
+                    }
+
+                    $('#card_token').val(response.id);
+                    setTimeout(function() {
+                        $('#register_form').submit();
+                    }, 0);
+                });
+
+                return false;
+            });
+        })
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation">
+                        <a href="https://www.omise.co/docs">Omise API Docs</a>
+                    </li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">Omise Jetty Example App</h3>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Step I - Register Customer with Card</h2>
+                <hr>
+
+                <form id="register_form" action="/two" method="post">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Card Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Card Number">
+                    </div>
+                    <div class="form-group">
+                        <label for="number">Credit Card Number</label>
+                        <input type="text" class="form-control" id="number" name="number" placeholder="Card Number">
+                    </div>
+                    <div class="form-group">
+                        <label for="expiration_month">Expiration Month</label>
+                        <input type="number" class="form-control" id="expiration_month" name="expiration_month" placeholder="Expiration Month">
+                    </div>
+                    <div class="form-group">
+                        <label for="expiration_year">Expiration Year</label>
+                        <input type="number" class="form-control" id="expiration_year" name="expiration_year" placeholder="Expiration Year">
+                    </div>
+                    <div class="form-group">
+                        <label for="security_code">CVC</label>
+                        <input type="number" class="form-control" id="security_code" name="security_code" placeholder="Security Code">
+                    </div>
+                    <input type="hidden" id="card_token" name="card_token">
+                    <button type="submit" class="btn btn-primary">
+                        Register Card
+                    </button>
+                </form>
+            </div>
+        </div> <!--/row-->
+    </div> <!--/container-->
+</body>
+</html>

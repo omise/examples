@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-guava:2.7.3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.datatype/jackson-datatype-guava/2.7.3/7fa709967be660a704d8b42e43d6811bf52a83fc/jackson-datatype-guava-2.7.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.datatype/jackson-datatype-guava/2.7.3/ad53f0c1ff8172a4a65ae457ab9767a4431f694c/jackson-datatype-guava-2.7.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

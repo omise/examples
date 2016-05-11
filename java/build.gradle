@@ -1,0 +1,19 @@
+group 'co.omise.examples'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+mainClassName = "co.omise.tamboon.Main"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'com.google.guava:guava:19.0'
+    compile 'co.omise:omise-java:2.0.3'
+    compile 'org.eclipse.jetty:jetty-server:9.3.9.M1'
+}
