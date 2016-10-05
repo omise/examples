@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Net;
 using System.Web.UI;
 using Omise;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ namespace OmiseASPNETForms
 
         private async Task createCharge()
         {
+            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+            
             var token = Request.Form["omiseToken"];
 
             var omise = new Client(skey: OmiseKeys.SecretKey);
