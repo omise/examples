@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RailsDemo</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'https://cdn.omise.co/omise.min.js.gz' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <div class="content">
+    <div class="logo"><%= image_tag("https://omise-cdn.s3.amazonaws.com/artwork/secured_by_omise_bodered.png") %></div>
+    <%= yield %>
+  </div>
+
+</body>
+</html>
