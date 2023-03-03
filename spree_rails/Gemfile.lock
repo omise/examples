@@ -137,7 +137,8 @@ GEM
       tzinfo (~> 1.1)
     acts_as_list (0.6.0)
       activerecord (>= 3.0)
-    addressable (2.3.8)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     arel (6.0.0)
     autoprefixer-rails (5.1.9)
       execjs
@@ -255,6 +256,7 @@ GEM
     premailer-rails (1.8.0)
       actionmailer (>= 3, < 5)
       premailer (~> 1.7, >= 1.7.9)
+    public_suffix (4.0.6)
     rabl (0.9.4.pre1)
       activesupport (>= 2.3.14)
     rack (1.6.0)
