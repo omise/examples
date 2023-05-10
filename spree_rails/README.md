@@ -54,18 +54,18 @@ Navigate to admin page and do the following:
 
 1. Set default currency as a Thai Baht in Currency Settings
 
-![Currency Settings](https://omise-cdn.s3.amazonaws.com/assets/spree/currency.png)
+![Currency Settings](https://cdn.omise.co/assets/spree/currency.png)
 
 2. Add a new Payment Method, go to Configurations > Payment Methods (/admin/payment_methods/new)
 
-![Add New Payment](https://omise-cdn.s3.amazonaws.com/assets/spree/add_new_payment.png)
+![Add New Payment](https://cdn.omise.co/assets/spree/add_new_payment.png)
 
 3. Edit Payment Method and add your API Keys
 
-![Add API Keys](https://omise-cdn.s3.amazonaws.com/assets/spree/set_keys.png)
+![Add API Keys](https://cdn.omise.co/assets/spree/set_keys.png)
 
 
 And your customers can now checkout with Omise Payment Gateway.
 
-![Checkout](https://omise-cdn.s3.amazonaws.com/assets/spree/checkout.png)
-![Checkout](https://omise-cdn.s3.amazonaws.com/assets/spree/succeed_order.png)
+![Checkout](https://cdn.omise.co/assets/spree/checkout.png)
+![Checkout](https://cdn.omise.co/assets/spree/succeed_order.png)
