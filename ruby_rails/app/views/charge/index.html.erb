@@ -1,0 +1,107 @@
+<div id="credit-card">
+カード決済(Manual):
+<form method=POST action="/create_charge">
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+金額:<input type="number" name="money"><br />
+名前:<input type="text" name="name"><br />
+カード番号:<input type="text" name="card_number" placeholder="4242 4242 4242 4242" style="width: 200px;"><br />
+セキュリティコード:<input type="text" name="security_code" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="333"><br />
+カードの有効期限(月):<input type="text" name="expired_month" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="09"><br />
+カードの有効期限(年):<input type="text" name="expired_year" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="2025"><br />
+<input type="submit" value="支払う">
+</form>
+</div>
+<hr />
+<div id="credit-card-opnpayment">
+カード決済(Omise PreBuild Form):
+<form method=POST action="/create_charge_omise">
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+<script type="text/javascript" src="https://cdn.omise.co/omise.js"
+          data-key="<%= Rails.configuration.omise_pub_key %>"
+          data-amount="100"
+          data-currency="JPY"
+          data-default-payment-method="credit_card">
+  </script>
+</form>
+</div>
+<hr />
+<div id="credit-card-opnpayment">
+カード決済(Omise PreBuild Form another):
+
+<form id="checkoutForm" method="POST" action="/create_charge_omise_another">
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+金額:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="100"> <br />
+
+  <input type="hidden" name="omiseToken">
+  <input type="hidden" name="omiseSource">
+  <button type="submit" id="checkoutButton">Checkout</button>
+</form>
+</div>
+<hr />
+
+
+<div id="paypay">
+PayPay決済:
+<form method=POST action="/paypay_charge">
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+金額:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="100"> <br />
+<input type="submit" value="支払う">
+</form>
+</div>
+<hr />
+<div id="paypay-another">
+PayPay決済(ソース課金を別):
+<form method=POST action="/paypay_charge_another">
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+金額:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="100"> <br />
+<input type="submit" value="支払う">
+</form>
+</div>
+<hr />
+<div id="googlepay">
+Google Pay:
+<form method=POST action="/google_charge" id="google_pay_form">
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+<input type="hidden" name="card_id" id="card_id" value="" />
+</form>
+</div> 
+
+<script>
+OmiseCard.configure({
+  publicKey: "<%= Rails.configuration.omise_pub_key %>"
+});
+
+var button = document.querySelector("#checkoutButton");
+var form = document.querySelector("#checkoutForm");
+var money = document.querySelector("#payment_amount").value;
+
+button.addEventListener("click", (event) => {
+  event.preventDefault();
+  OmiseCard.open({
+    amount: money,
+    currency: "JPY",
+    defaultPaymentMethod: "credit_card",
+    onCreateTokenSuccess: (nonce) => {
+        if (nonce.startsWith("tokn_")) {
+            form.omiseToken.value = nonce;
+        } else {
+            form.omiseSource.value = nonce;
+        };
+      form.submit();
+    }
+  });
+});
+const ccInput = document.querySelector('[name="card_number"]');
+ccInput.addEventListener("input", inputCreditCard);
+
+function inputCreditCard(e) {
+    // console.log(e.target.value);
+    var v = e.target.value;
+    v = v.replace(/[^0-9 ]+/i,'');
+    if(v.length == 4 || v.length == 9 || v.length == 14){
+      v = v + ' ';
+    }
+    e.target.value = v;
+}
+</script>
