@@ -54,7 +54,7 @@ An Omise account (and your $OMISE_PUBLIC_KEY and $OMISE_SECRET_KEY)
 
 This example project use this Ruby and Rails version
 
-- Ruby 3.0.0
+- Ruby 3.1.3
 - Rails 7.0.7.2
 - mysql 8.1
 
