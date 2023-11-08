@@ -1,19 +1,19 @@
 <div id="credit-card">
-カード決済(Manual):
+Credit Card Charge(Manual):
 <form method=POST action="/create_charge">
 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-金額:<input type="number" name="money"><br />
-名前:<input type="text" name="name"><br />
-カード番号:<input type="text" name="card_number" placeholder="4242 4242 4242 4242" style="width: 200px;"><br />
-セキュリティコード:<input type="text" name="security_code" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="333"><br />
-カードの有効期限(月):<input type="text" name="expired_month" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="09"><br />
-カードの有効期限(年):<input type="text" name="expired_year" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="2025"><br />
-<input type="submit" value="支払う">
+Amount:<input type="number" name="money"><br />
+Name:<input type="text" name="name"><br />
+Card Number:<input type="text" name="card_number" placeholder="4242 4242 4242 4242" style="width: 200px;"><br />
+Security Code:<input type="text" name="security_code" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="333"><br />
+Expiration Month:<input type="text" name="expired_month" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="09"><br />
+Expiration Year:<input type="text" name="expired_year" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="2025"><br />
+<input type="submit" value="Pay">
 </form>
 </div>
 <hr />
 <div id="credit-card-opnpayment">
-カード決済(Omise PreBuild Form):
+Credit Card Charge(Omise PreBuild Form):
 <form method=POST action="/create_charge_omise">
 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
@@ -27,11 +27,11 @@
 </div>
 <hr />
 <div id="credit-card-opnpayment">
-カード決済(Omise PreBuild Form another):
+Credit Card Charge(Omise PreBuild Form another):
 
 <form id="checkoutForm" method="POST" action="/create_charge_omise_another">
 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-金額:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="100"> <br />
+Amount:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="100"> <br />
 
   <input type="hidden" name="omiseToken">
   <input type="hidden" name="omiseSource">
@@ -42,20 +42,20 @@
 
 
 <div id="paypay">
-PayPay決済:
+PayPay Charge(Create Source and Charge at the same time):
 <form method=POST action="/paypay_charge">
 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-金額:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="100"> <br />
-<input type="submit" value="支払う">
+Amount:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="100"> <br />
+<input type="submit" value="Pay">
 </form>
 </div>
 <hr />
 <div id="paypay-another">
-PayPay決済(ソース課金を別):
+PayPay Charge(Create source, then Create Charge):
 <form method=POST action="/paypay_charge_another">
 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-金額:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="100"> <br />
-<input type="submit" value="支払う">
+Amount:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="100"> <br />
+<input type="submit" value="Pay">
 </form>
 </div>
 <hr />

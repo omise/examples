@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   post 'paypay_charge', to: 'charge#chargePayPay'
   post 'paypay_charge_another', to: 'charge#chargePayPayAnother'
   post 'google_charge', to: 'charge#chargeGoogle'
-  get 'paypay_return/:payment_id', to: 'charge#returnPayPay'
+  get 'charge_return/:payment_id', to: 'charge#returnCharge'
 end
