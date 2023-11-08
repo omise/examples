@@ -239,21 +239,21 @@ function getGoogleTransactionInfo() {
 
 <body>
 <div id="credit-card-manual">
-カード決済(Manual):
+Credit Card Charge:
 <form method=POST action="/create_charge">
 @csrf <!-- {{ csrf_field() }} -->
-金額:<input type="text" name="money" oninput="value = value.replace(/[^0-9]+/i,'');"><br />
-名前:<input type="text" name="name"><br />
-カード番号:<input class="cc-num" id="cc_num" type="text" autocomplete="cc-number" inputmode="numeric" name="card_number" placeholder="4242 4242 4242 4242" style="width: 200px;" ><br />
-セキュリティコード:<input type="tel" name="security_code" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="333"><br />
-カードの有効期限(月):<input type="tel" name="expired_month" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="09"><br />
-カードの有効期限(年):<input type="tel" name="expired_year" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="2027"><br />
-<input type="submit" value="支払う">
+Amount:<input type="text" name="money" oninput="value = value.replace(/[^0-9]+/i,'');"><br />
+Name:<input type="text" name="name"><br />
+Card Number:<input class="cc-num" id="cc_num" type="text" autocomplete="cc-number" inputmode="numeric" name="card_number" placeholder="4242 4242 4242 4242" style="width: 200px;" ><br />
+Security Code:<input type="tel" name="security_code" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="333"><br />
+expiration_month:<input type="tel" name="expired_month" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="09"><br />
+expiration_year:<input type="tel" name="expired_year" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="2027"><br />
+<input type="submit" value="Pay">
 </form>
 </div>
 <hr />
 <div id="credit-card-opnpayment">
-カード決済(Omise PreBuild Form):
+Credit Card Charge(Omise PreBuild Form):
 <form method=POST action="/create_charge_omise">
 @csrf <!-- {{ csrf_field() }} -->
 
@@ -268,34 +268,34 @@ function getGoogleTransactionInfo() {
 <hr />
 
 <div id="credit-card-opnpayment">
-カード決済(Omise PreBuild Form another):
+Credit Card Charge(Omise PreBuild Form another):
 
 <form id="checkoutForm" method="POST" action="/create_charge_omise_another">
 @csrf <!-- {{ csrf_field() }} -->
-金額:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');"> <br />
+Amount:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');"> <br />
 
   <input type="hidden" name="omiseToken">
   <input type="hidden" name="omiseSource">
-  <button type="submit" id="checkoutButton">Checkout</button>
+  <button type="submit" id="checkoutButton">Pay</button>
 </form>
 </div>
 <hr />
 
 <div id="paypay">
-PayPay決済(ソース課金同時):
+PayPay Charge(Create Source and Charge at the same time):
 <form method=POST action="/charge_paypay">
 @csrf <!-- {{ csrf_field() }} -->
-金額:<input type="text" name="money" oninput="value = value.replace(/[^0-9]+/i,'');"><br />
-<input type="submit" value="支払う">
+Amount:<input type="text" name="money" oninput="value = value.replace(/[^0-9]+/i,'');"><br />
+<input type="submit" value="Pay">
 </form>
 </div>
 <hr />
 <div id="paypay-another">
-PayPay決済(ソース課金を別):
+PayPay Charge(Create source, then Create Charge):
 <form method=POST action="/charge_paypay_another">
 @csrf <!-- {{ csrf_field() }} -->
-金額:<input type="text" name="money" oninput="value = value.replace(/[^0-9]+/i,'');"><br />
-<input type="submit" value="支払う">
+Amount:<input type="text" name="money" oninput="value = value.replace(/[^0-9]+/i,'');"><br />
+<input type="submit" value="Pay">
 </form>
 </div>
 <hr />

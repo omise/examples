@@ -19,31 +19,32 @@ class ChargeController extends Controller
     }
 
     /**
-     * 基本的にchargeをするときは、tokenを作って、それを元にchargeを作るものと理解してる
+     * When creating charge, at first create a card token, next, create a charge with this token
      */
     public function cardCharge(Request $req) : View {
 
-        // print_r($req->name);
-        \Log::debug($req->name);
+        $strPaymentId = $this->random(9);
 
-        $token = OmiseToken::create(array(
-            'card' => array(
+        $token = OmiseToken::create([
+            'card' => [
               'name' => $req->name,
               'number' => trim($req->card_number),
               'expiration_month' => $req->expired_month,
               'expiration_year' => $req->expired_year,
               'security_code' => $req->security_code,
-            )
-          ));
+            ]
+          ]);
         
 
-        $charge = OmiseCharge::create(array(
+        $charge = OmiseCharge::create([
             'amount' => $req->money,
             'currency' => 'jpy',
             'card' => $token['id']
-        ));
+        ]);
 
         // print_r($charge);
+        $this->savePaymentInfo($strPaymentId, $charge['id'], 'paypay');
+
 
         return view('charge-result', ['charge'=>$charge]);
     }
@@ -53,15 +54,18 @@ class ChargeController extends Controller
      */
     public function cardChargeOmise(Request $req) : View {
 
-        \Log::debug($req);
+        $strPaymentId = $this->random(9);
 
-        $charge = OmiseCharge::create(array(
+        $charge = OmiseCharge::create([
             'amount' => 100,
             'currency' => 'jpy',
+            'return_uri' => config('app.url').'/charge_return?payment_id='.$strPaymentId,
             'card' => $req->omiseToken
-        ));
+        ]);
 
         // print_r($charge);
+        $this->savePaymentInfo($strPaymentId, $charge['id'], 'paypay');
+
 
         return view('charge-result', ['charge'=>$charge]);
     }
@@ -71,15 +75,18 @@ class ChargeController extends Controller
      */
     public function cardChargeOmiseAnother(Request $req) : View {
 
-        \Log::debug($req);
+        $strPaymentId = $this->random(9);
 
-        $charge = OmiseCharge::create(array(
+        $charge = OmiseCharge::create([
             'amount' => $req->money,
             'currency' => 'jpy',
+            'return_uri' => config('app.url').'/charge_return?payment_id='.$strPaymentId,
             'card' => $req->omiseToken
-        ));
+        ]);
 
         // print_r($charge);
+        $this->savePaymentInfo($strPaymentId, $charge['id'], 'paypay');
+
 
         return view('charge-result', ['charge'=>$charge]);
     }
@@ -90,13 +97,11 @@ class ChargeController extends Controller
     }
 
     /**
-     * 基本的にchargeをするときは、tokenを作って、それを元にchargeを作るものと理解してる
+     * When creating charge, at first create a card token, next, create a charge with this token
      */
     public function paypayCharge(Request $req) : RedirectResponse {
 
         $apiURL = 'https://api.omise.co/charges';
-
-        $encoded = base64_encode(env('OMISE_SECRET_KEY') . ':' );
 
         $strPaymentId = $this->random(9);
 
@@ -104,19 +109,16 @@ class ChargeController extends Controller
             'amount' => $req->money,
             // 'tokenization[data]' => urlencoe($req->token),
             'currency' => 'JPY',
-            'return_uri' => env('APP_URL').'/paypay_return?payment_id='.$strPaymentId,
+            'return_uri' => config('app.url').'/charge_return?payment_id='.$strPaymentId,
             'source[type]' => "paypay"
         ];
 
-        \Log::debug($postInput);
 
-        $response = Http::withBasicAuth(env('OMISE_SECRET_KEY'),'')->asForm()->post($apiURL, $postInput);
+        $response = Http::withBasicAuth(config('omise.omise_secret_key'),'')->asForm()->post($apiURL, $postInput);
 
         $statusCode = $response->status();
         $responseBody = json_decode($response->getBody(), true);
      
-        \Log::debug($statusCode);
-        \Log::debug($responseBody);
 
         // print_r($charge);
 
@@ -126,15 +128,15 @@ class ChargeController extends Controller
     }
 
     /**
-     * 基本的にchargeをするときは、tokenを作って、それを元にchargeを作るものと理解してる
+     * When creating charge, at first create a card token, next, create a charge with this token
      */
     public function paypayChargeAnother(Request $req) : RedirectResponse {
 
-        $source = OmiseSource::create(array(
+        $source = OmiseSource::create([
             'amount' => $req->money,
             'currency' => 'jpy',
             'type' => 'paypay'
-        ));    
+        ]);    
 
 
         // $apiURL = 'https://api.omise.co/charges';
@@ -144,12 +146,12 @@ class ChargeController extends Controller
         $strPaymentId = $this->random(9);
 
         
-        $charge = OmiseCharge::create(array(
+        $charge = OmiseCharge::create([
             'amount' => $req->money,
             'currency' => 'jpy',
             'source' => $source['id'],
-            'return_uri' => env('APP_URL').'/paypay_return?payment_id='.$strPaymentId,
-        ));
+            'return_uri' => config('app.url').'/charge_return?payment_id='.$strPaymentId,
+        ]);
 
 
         // print_r($charge);
@@ -161,44 +163,27 @@ class ChargeController extends Controller
     
 
     /**
-     * 基本的にchargeをするときは、tokenを作って、それを元にchargeを作るものと理解してる
+     * When creating charge, at first create a card token, next, create a charge with this token
      */
     public function googleCharge(Request $req) : View {
 
-        // まずはtokenを作成
-        
-        // 続いて課金する
-        // $apiURL = 'https://api.omise.co/charges';
 
-        // $postInput = [
-        //     'amount' => '100',
-        //     // 'tokenization[data]' => urlencoe($req->token),
-        //     'currency' => 'jpy',
-        //     'card' => $responseBody['id'],
-        // ];
+        $strPaymentId = $this->random(9);
 
-        // $response = Http::withBasicAuth(env('OMISE_SECRET_KEY'),'')->asForm()->post($apiURL, $postInput);
-
-        // $statusCode = $response->status();
-        // $responseBody = json_decode($response->getBody(), true);
-     
-        // \Log::debug($statusCode);
-        // \Log::debug($responseBody);
-
-        // $strPaymentId = $this->random(9);
-
-        $charge = OmiseCharge::create(array(
+        $charge = OmiseCharge::create([
             'amount' => '100',
             'currency' => 'jpy',
             'card' => $req->card_id,
-        ));
+            'return_uri' => config('app.url').'/charge_return?payment_id='.$strPaymentId,
+
+        ]);
 
         return view('charge-result', ['charge'=>$charge]);
 
     }
 
     /**
-     * Paymentの情報をDBに保存する
+     * Store a payment info to DB 
      */
     private function savePaymentInfo($strPaymentId, $strChargeId, $strPaymentType){
 
@@ -212,14 +197,14 @@ class ChargeController extends Controller
     }
 
     /**
-     * paypayでリクエストした時、返って来る場所
+     * it's a return_uri for charge
      */
-    public function paypayReturn(Request $req) : View {
+    public function chargeReturn(Request $req) : View {
 
-        // chargeの結果をAPI経由で確認。
+        // Fetch payment infomation from DB.
         $payment = Payment::where('payment_id', $req->payment_id)->first();
 
-        // chargeの状態をAPIから取得
+        // Fetch charge info via OmiseCharge API
         $charge = OmiseCharge::retrieve($payment->charge_id);
 
         return view('charge-result', ['charge'=>$charge]);

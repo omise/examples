@@ -18,7 +18,7 @@ use App\Http\Controllers\ChargeController;
 //     return view('action-list');
 // });
 
-Route::get('/paypay_return', [ChargeController::class, 'paypayReturn']);
+Route::get('/charge_return', [ChargeController::class, 'chargeReturn']);
 Route::get('/', [ChargeController::class, 'index']);
 Route::get('/check_charge', [ChargeController::class, 'checkCharge']);
 Route::post('/create_charge', [ChargeController::class, 'cardCharge']);
