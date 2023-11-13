@@ -25,26 +25,14 @@ class ChargeController extends Controller
 
         $strPaymentId = $this->random(9);
 
-        $token = OmiseToken::create([
-            'card' => [
-              'name' => $req->name,
-              'number' => trim($req->card_number),
-              'expiration_month' => $req->expired_month,
-              'expiration_year' => $req->expired_year,
-              'security_code' => $req->security_code,
-            ]
-          ]);
-        
-
         $charge = OmiseCharge::create([
-            'amount' => $req->money,
+            'amount' => $req->amount,
             'currency' => 'jpy',
-            'card' => $token['id']
+            'card' => $req->token
         ]);
 
         // print_r($charge);
         $this->savePaymentInfo($strPaymentId, $charge['id'], 'paypay');
-
 
         return view('charge-result', ['charge'=>$charge]);
     }

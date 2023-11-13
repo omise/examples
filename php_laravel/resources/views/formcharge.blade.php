@@ -240,15 +240,19 @@ function getGoogleTransactionInfo() {
 <body>
 <div id="credit-card-manual">
 Credit Card Charge:
-<form method=POST action="/create_charge">
-@csrf <!-- {{ csrf_field() }} -->
+<form>
 Amount:<input type="text" name="money" oninput="value = value.replace(/[^0-9]+/i,'');"><br />
 Name:<input type="text" name="name"><br />
 Card Number:<input class="cc-num" id="cc_num" type="text" autocomplete="cc-number" inputmode="numeric" name="card_number" placeholder="4242 4242 4242 4242" style="width: 200px;" ><br />
 Security Code:<input type="tel" name="security_code" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="333"><br />
 expiration_month:<input type="tel" name="expired_month" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="09"><br />
 expiration_year:<input type="tel" name="expired_year" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="2027"><br />
-<input type="submit" value="Pay">
+<input type="button" value="Pay" onclick="createToken()">
+</form>
+<form method=POST action="/create_charge" id="creditCardCharge" >
+@csrf <!-- {{ csrf_field() }} -->
+<input type="hidden" name="amount" id="credit_card_amount" value="" />
+<input type="hidden" name="token" id="token" value="" />
 </form>
 </div>
 <hr />
@@ -347,4 +351,34 @@ function inputCreditCard(e) {
     }
     e.target.value = v;
 }
+
+function createToken() {
+  var cardNumber = document.querySelector('[name="card_number"]').value;
+  var name = document.querySelector('[name="name"]').value;
+  var money = document.querySelector('[name="money"]').value;
+  var securityCode = document.querySelector('[name="security_code"]').value;
+  var expiredMonth = document.querySelector('[name="expired_month"]').value;
+  var expiredYear = document.querySelector('[name="expired_year"]').value;
+
+  var form = document.querySelector("#creditCardCharge");
+
+  Omise.setPublicKey("{{ env('OMISE_PUBLIC_KEY') }}");
+  Omise.createToken("card",
+  {
+    "expiration_month": expiredMonth,
+    "expiration_year": expiredYear,
+    "name": name,
+    "number": cardNumber.trim(),
+    "security_code": securityCode,
+  },
+  function(statusCode, response) {
+    // console.log(response["id"])
+
+    document.querySelector('[name="amount"]').value = money;
+    document.querySelector('[name="token"]').value = response["id"];
+
+    form.submit();
+  });
+}  
+
 </script>
