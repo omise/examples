@@ -14,19 +14,12 @@ class ChargeController < ApplicationController
     strPaymentId = SecureRandom.alphanumeric(10)
 
     # At first, Create Token
-    token = Omise::Token.create(card: {
-      name: params[:name],
-      number: params[:card_number].gsub(/\s+/, ""),
-      expiration_month: params[:expired_month],
-      expiration_year: params[:expired_year],
-      security_code: params[:security_code]
-    })
-
+    
     # Later, Create Charge
     @charge = Omise::Charge.create({
-      amount: params[:money],
+      amount: params[:amount],
       currency: "jpy",
-      card: token[:id],
+      card: params[:token],
       return_uri: Rails.configuration.host + "/charge_return/" + strPaymentId, 
     })
 

@@ -1,6 +1,6 @@
 <div id="credit-card">
 Credit Card Charge(Manual):
-<form method=POST action="/create_charge">
+<form>
 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 Amount:<input type="number" name="money"><br />
 Name:<input type="text" name="name"><br />
@@ -8,7 +8,12 @@ Card Number:<input type="text" name="card_number" placeholder="4242 4242 4242 42
 Security Code:<input type="text" name="security_code" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="333"><br />
 Expiration Month:<input type="text" name="expired_month" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="09"><br />
 Expiration Year:<input type="text" name="expired_year" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="2025"><br />
-<input type="submit" value="Pay">
+<input type="button" value="Pay" onclick="createToken()">
+</form>
+<form method=POST action="/create_charge" id="creditCardCharge" >
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+<input type="hidden" name="amount" id="credit_card_amount" value="" />
+<input type="hidden" name="token" id="token" value="" />
 </form>
 </div>
 <hr />
@@ -104,4 +109,33 @@ function inputCreditCard(e) {
     }
     e.target.value = v;
 }
+
+function createToken() {
+  var cardNumber = document.querySelector('[name="card_number"]').value;
+  var name = document.querySelector('[name="name"]').value;
+  var money = document.querySelector('[name="money"]').value;
+  var securityCode = document.querySelector('[name="security_code"]').value;
+  var expiredMonth = document.querySelector('[name="expired_month"]').value;
+  var expiredYear = document.querySelector('[name="expired_year"]').value;
+
+  var form = document.querySelector("#creditCardCharge");
+
+  Omise.setPublicKey("<%= Rails.configuration.omise_pub_key %>");
+  Omise.createToken("card",
+  {
+    "expiration_month": expiredMonth,
+    "expiration_year": expiredYear,
+    "name": name,
+    "number": cardNumber.trim(),
+    "security_code": securityCode,
+  },
+  function(statusCode, response) {
+    // console.log(response["id"])
+
+    document.querySelector('[name="amount"]').value = money;
+    document.querySelector('[name="token"]').value = response["id"];
+
+    form.submit();
+  });
+}  
 </script>
