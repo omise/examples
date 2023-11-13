@@ -12,3 +12,8 @@ export const unloadScript = (src: string) => {
   const scriptTag = document.querySelector(`script[src="${src}"]`);
   if (scriptTag) document.body.removeChild(scriptTag);
 };
+
+export const generateRandomString = (charCount = 7): string => {
+  const str = Math.random().toString(36).substring(2).slice(-charCount)
+  return str.length < charCount ? str + 'a'.repeat(charCount - str.length) : str
+}

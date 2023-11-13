@@ -1,18 +1,18 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { loadScript } from "@/lib/client/util";
+import { loadScript, generateRandomString } from "@/lib/client/util";
 import Omise from "@/@types/omise/omise";
 import { desc, input, note, table } from "../styles";
 import { useAPICreditCard } from "@/lib/client/api";
 
 export default function Page() {
   const [omise, setOmise] = useState<Omise>();
-  // jsロード
+  // load Omise js
   useEffect(() => {
     loadScript("https://cdn.omise.co/omise.js").then((e) => {
       setOmise(window.Omise);
-      // 管理画面から取得したパブリックキーを指定する
+      // Set public key that is in Omise Dashboard.
       window.Omise.setPublicKey(process.env.NEXT_PUBLIC_OMISE_PUBLIC_KEY);
     });
   }, []);
@@ -56,8 +56,12 @@ export default function Page() {
       },
       // トークン作成完了
       async (_, response) => {
-        const res = await creditCard(1000, response.id);
-        alert("決済完了");
+        const paymentId= generateRandomString(8)
+        const returnUri = 'http://localhost:3000/paypay-return?payment_id='+paymentId
+    
+        const res = await creditCard(1000, response.id, paymentId, returnUri);
+        alert("Complete Payment");
+        console.log(res);
         setPaymentResult(JSON.stringify(res.data, null, "\t"));
       }
     );
@@ -78,15 +82,13 @@ export default function Page() {
         >
           https://www.omise.co/omise-js#requesting-tokens-and-sources-directly
         </a>
-        <p style={{ marginTop: "8px", marginBottom: "8px" }}>
-          UIは自前で作る。
-        </p>
-        <h2>指定可能なパラメーター一覧</h2>
+      
+        <h2>Parameter list that can be used.</h2>
         <form onSubmit={onSubmit}>
           <table style={table} border={1}>
             <tbody>
               <tr>
-                <th>カード名義</th>
+                <th>Card Holder Name</th>
                 <th>name</th>
                 <th>
                   <input
@@ -98,11 +100,11 @@ export default function Page() {
                   />
                 </th>
                 <th>
-                  <p style={desc}>必須項目</p>
+                  <p style={desc}>required</p>
                 </th>
               </tr>
               <tr>
-                <th>カード番号</th>
+                <th>Card Number</th>
                 <th>number</th>
                 <th>
                   <input
@@ -114,11 +116,11 @@ export default function Page() {
                   />
                 </th>
                 <th>
-                  <p style={desc}>必須項目</p>
+                  <p style={desc}>required</p>
                 </th>
               </tr>
               <tr>
-                <th>有効期限（月）</th>
+                <th>expiration_month</th>
                 <th>expiration_month</th>
                 <th>
                   <select
@@ -144,11 +146,11 @@ export default function Page() {
                   </select>
                 </th>
                 <th>
-                  <p style={desc}>必須項目。`M` or `MM`</p>
+                  <p style={desc}>required.`M` or `MM`</p>
                 </th>
               </tr>
               <tr>
-                <th>有効期限（年）</th>
+                <th>expiration_year</th>
                 <th>expiration_year</th>
                 <th>
                   <select
@@ -164,11 +166,11 @@ export default function Page() {
                   </select>
                 </th>
                 <th>
-                  <p style={desc}>必須項目。`YY` or `YYYY`</p>
+                  <p style={desc}>required.`YY` or `YYYY`</p>
                 </th>
               </tr>
               <tr>
-                <th>セキュリティコード</th>
+                <th>security_code</th>
                 <th>security_code</th>
                 <th>
                   <input
@@ -180,11 +182,11 @@ export default function Page() {
                   />
                 </th>
                 <th>
-                  <p style={desc}>オプションだが推奨。</p>
+                  <p style={desc}>Option, but recomended.</p>
                 </th>
               </tr>
               <tr>
-                <th>郵便番号</th>
+                <th>postal_code</th>
                 <th>postal_code</th>
                 <th>
                   <input
@@ -197,7 +199,7 @@ export default function Page() {
                 </th>
                 <th>
                   <p style={desc}>
-                    オプションだが推奨。`-`はあってもなくてもよさげ。
+                  vit works both with '-' and without '-'.
                   </p>
                 </th>
               </tr>
@@ -214,11 +216,11 @@ export default function Page() {
                   />
                 </th>
                 <th>
-                  <p style={desc}>オプションだが推奨。ISO 3166。</p>
+                  <p style={desc}>Option, but recomended.ISO 3166.</p>
                 </th>
               </tr>
               <tr>
-                <th>州</th>
+                <th>state</th>
                 <th>state</th>
                 <th>
                   <input
@@ -230,12 +232,12 @@ export default function Page() {
                   />
                 </th>
                 <th>
-                  <p style={desc}>オプションだが推奨。</p>
-                  <p style={note}>日本の場合、都道府県でいい？</p>
+                  <p style={desc}>Option, but recomended.</p>
+                  <p style={note}>In case of Japan, Is it pref?</p>
                 </th>
               </tr>
               <tr>
-                <th>都市</th>
+                <th>city</th>
                 <th>city</th>
                 <th>
                   <input
@@ -247,12 +249,12 @@ export default function Page() {
                   />
                 </th>
                 <th>
-                  <p style={desc}>オプションだが推奨。</p>
-                  <p style={note}>日本の場合、市区町村でいい？</p>
+                  <p style={desc}>Option, but recomended.</p>
+                  <p style={note}>In case of Japan, Is it city?</p>
                 </th>
               </tr>
               <tr>
-                <th>通り</th>
+                <th>street</th>
                 <th>street</th>
                 <th>
                   <input
@@ -264,12 +266,12 @@ export default function Page() {
                   />
                 </th>
                 <th>
-                  <p style={desc}>オプションだが推奨。</p>
-                  <p style={note}>日本の場合、X-X-Xでいい？</p>
+                  <p style={desc}>Option, but recomended.</p>
+                  <p style={note}>In case of Japan, Is it like X-X-X?</p>
                 </th>
               </tr>
               <tr>
-                <th>通り2</th>
+                <th>street2</th>
                 <th>street2</th>
                 <th>
                   <input
@@ -281,12 +283,12 @@ export default function Page() {
                   />
                 </th>
                 <th>
-                  <p style={desc}>オプション</p>
-                  <p style={note}>日本の場合、マンション名などでいい？</p>
+                  <p style={desc}>Option</p>
+                  <p style={note}>In case of Japan, Is it condominium name?</p>
                 </th>
               </tr>
               <tr>
-                <th>電話番号</th>
+                <th>phone number</th>
                 <th>phone_number</th>
                 <th>
                   <input
@@ -298,7 +300,7 @@ export default function Page() {
                   />
                 </th>
                 <th>
-                  <p style={desc}>オプション</p>
+                  <p style={desc}>option</p>
                 </th>
               </tr>
             </tbody>
@@ -306,7 +308,7 @@ export default function Page() {
           <button>Create token</button>
         </form>
         <br />
-        <h2>決済結果</h2>
+        <h2>Payment Result</h2>
         <pre>{paymentResult}</pre>
       </div>
     </main>

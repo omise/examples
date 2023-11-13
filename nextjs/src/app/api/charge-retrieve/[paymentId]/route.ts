@@ -8,7 +8,6 @@ interface ChargeRetrieveRequest {
 
 const omise: IOmise = require("omise")({
   secretKey: process.env.OMISE_SECRET_KEY,
-  omiseVersion: "2015-09-10",
 });
 
 export async function GET(
@@ -25,10 +24,9 @@ export async function GET(
 
   try {
     const charge = await omise.charges.retrieve(objPayment?.chageId ?? "");
-    console.log(charge);
 
     // Omise-nodeに型定義がない
-    if (charge.captured) {
+    if (charge.paid) {
       return NextResponse.json(charge);
     } else {
       return NextResponse.json(charge, { status: 500 });

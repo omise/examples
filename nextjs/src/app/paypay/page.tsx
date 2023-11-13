@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { loadScript } from "@/lib/client/util";
+import { loadScript, generateRandomString } from "@/lib/client/util";
 import Omise from "@/@types/omise/omise";
 import { useRouter } from 'next/navigation'
 import { useAPIPayPay, useAPIChargeBySource } from "@/lib/client/api";
@@ -15,7 +15,7 @@ export default function Page() {
   useEffect(() => {
     loadScript("https://cdn.omise.co/omise.js").then((e) => {
       setOmise(window.Omise);
-      // 管理画面から取得したパブリックキーを指定する
+      //Set public key that is from merchant dashboard
       window.Omise.setPublicKey(process.env.NEXT_PUBLIC_OMISE_PUBLIC_KEY);
     });
   }, []);
@@ -24,10 +24,6 @@ export default function Page() {
   const paybyPayPayAnother = useAPIChargeBySource();  
   const router = useRouter()
 
-  const generateRandomString = (charCount = 7): string => {
-    const str = Math.random().toString(36).substring(2).slice(-charCount)
-    return str.length < charCount ? str + 'a'.repeat(charCount - str.length) : str
-  }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -48,7 +44,7 @@ export default function Page() {
         "amount": 1000,
         "currency": "JPY",
       },
-      // トークン作成完了
+      
       async (_, response) => {
         const res = await paybyPayPayAnother(1000, response.id, returnUri, paymentId)
         console.log(res)
