@@ -23,7 +23,7 @@ class ChargeController < ApplicationController
       return_uri: Rails.configuration.host + "/charge_return/" + strPaymentId, 
     })
 
-    payment = Payment.create("charge_id": @charge["id"], "payment_id": strPaymentId, "payment_type": "paypay")
+    payment = Payment.create("charge_id": @charge["id"], "payment_id": strPaymentId, "payment_type": "credit_card")
     payment.save
 
     render "charge/result"
@@ -41,7 +41,7 @@ class ChargeController < ApplicationController
       return_uri: Rails.configuration.host + "/charge_return/" + strPaymentId, 
     })
 
-    payment = Payment.create("charge_id": @charge["id"], "payment_id": strPaymentId, "payment_type": "paypay")
+    payment = Payment.create("charge_id": @charge["id"], "payment_id": strPaymentId, "payment_type": "credit_card")
     payment.save
 
     render "charge/result"
@@ -59,7 +59,7 @@ class ChargeController < ApplicationController
       return_uri: Rails.configuration.host + "/charge_return/" + strPaymentId, 
     })
 
-    payment = Payment.create("charge_id": @charge["id"], "payment_id": strPaymentId, "payment_type": "paypay")
+    payment = Payment.create("charge_id": @charge["id"], "payment_id": strPaymentId, "payment_type": "credit_card")
     payment.save
 
     render "charge/result"
