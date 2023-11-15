@@ -24,23 +24,19 @@ def index(request):
 
 def creditCard(request):
 
-    # tokenを作成
-    token = omise.Token.create(
-        name=request.POST["name"],
-        number=request.POST["card_number"].replace(" ", ""),
-        expiration_month=request.POST["expired_month"],
-        expiration_year=request.POST["expired_year"],
-        security_code=request.POST["security_code"],
-    )
+    strRandom = randomstr(10)
 
-    # chargeを作成
+    # Create charge
     charge = omise.Charge.create(
-        amount=request.POST["money"],
+        amount=request.POST["amount"],
         currency="jpy",
-        card=token.id,
+        return_uri= settings.SERVICE_HOST + "/omise/charge/paypay_return?payment_id=" + strRandom,
+        card=request.POST["token"],
     )
 
-    params = { # <- 渡したい変数を辞書型オブジェクトに格納
+    Payment.objects.create(charge_id=charge.id, payment_id=strRandom, payment_type="credit card")
+
+    params = { 
         'charge': charge,
     }
     return render(request, 'charge_result.html', params)
@@ -48,14 +44,19 @@ def creditCard(request):
 # in case of using omise pre-build form
 def creditCardOmise(request):
 
-    # chargeを作成
+    strRandom = randomstr(10)
+
+    # Create charge
     charge = omise.Charge.create(
         amount=100,
         currency="jpy",
+        return_uri= settings.SERVICE_HOST + "/omise/charge/paypay_return?payment_id=" + strRandom,
         card=request.POST["omiseToken"],
     )
 
-    params = { # <- 渡したい変数を辞書型オブジェクトに格納
+    Payment.objects.create(charge_id=charge.id, payment_id=strRandom, payment_type="credit card")
+
+    params = { 
         'charge': charge,
     }
     return render(request, 'charge_result.html', params)
@@ -64,14 +65,19 @@ def creditCardOmise(request):
 # in case of using omise pre-build form another
 def creditCardOmiseAnother(request):
 
-    # chargeを作成
+    strRandom = randomstr(10)
+
+    # Create charge
     charge = omise.Charge.create(
         amount=request.POST["money"],
         currency="jpy",
+        return_uri= settings.SERVICE_HOST + "/omise/charge/paypay_return?payment_id=" + strRandom,
         card=request.POST["omiseToken"],
     )
 
-    params = { # <- 渡したい変数を辞書型オブジェクトに格納
+    Payment.objects.create(charge_id=charge.id, payment_id=strRandom, payment_type="credit card")
+
+    params = { 
         'charge': charge,
     }
     return render(request, 'charge_result.html', params)
@@ -79,11 +85,6 @@ def creditCardOmiseAnother(request):
 def paypay(request):
 
     strRandom = randomstr(10)
-
-    # postInput = {"amount": request.POST["money"],
-    #               "currency": "JPY", 
-    #               "return_uri": settings.SERVICE_HOST + "/omise/charge/paypay_return?payment_id=" + strRandom, 
-    #               "source[type]": "paypay"}
     
     files = {
         'amount': (None, request.POST["money"]),
@@ -96,8 +97,6 @@ def paypay(request):
     strSecret = omise.api_secret
     
     r = requests.post(apiURL, files=files, auth=requests.auth.HTTPBasicAuth(strSecret, ""))
-
-    print(f"statusCode: {r.status_code}")
 
     respDict = r.json()
 
@@ -134,7 +133,7 @@ def paypayReturn(request):
 
     charge = omise.Charge.retrieve(payment.charge_id)
 
-    params = { # <- 渡したい変数を辞書型オブジェクトに格納
+    params = { 
         'charge': charge,
     }
     return render(request, 'charge_result.html', params)
@@ -142,14 +141,14 @@ def paypayReturn(request):
 
 def google(request):
 
-    # chargeを作成
+    
     charge = omise.Charge.create(
         amount="100",
         currency="jpy",
         card=request.POST["card_id"],
     )
 
-    params = { # <- 渡したい変数を辞書型オブジェクトに格納
+    params = { 
         'charge': charge,
     }
     return render(request, 'charge_result.html', params)

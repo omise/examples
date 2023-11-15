@@ -240,21 +240,25 @@ function getGoogleTransactionInfo() {
 
 <body>
 <div id="credit-card">
-カード決済(Manual):
-<form method=POST action="/omise/charge/credit_card">
+Credit Card Charge:
+<form>
+  Amount:<input type="text" name="money" oninput="value = value.replace(/[^0-9]+/i,'');"><br />
+  Name:<input type="text" name="name"><br />
+  Card Number:<input class="cc-num" id="cc_num" type="text" autocomplete="cc-number" inputmode="numeric" name="card_number" placeholder="4242 4242 4242 4242" style="width: 200px;" ><br />
+  Security Code:<input type="tel" name="security_code" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="333"><br />
+  expiration_month:<input type="tel" name="expired_month" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="09"><br />
+  expiration_year:<input type="tel" name="expired_year" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="2027"><br />
+  <input type="button" value="Pay" onclick="createToken()">
+</form>  
+<form method=POST id="creditCardCharge" action="/omise/charge/credit_card">
 {% csrf_token %}
-金額:<input type="text" name="money" oninput="value = value.replace(/[^0-9]+/i,'');"><br />
-名前:<input type="text" name="name"><br />
-カード番号:<input class="cc-num" id="cc_num" type="text" autocomplete="cc-number" inputmode="numeric" name="card_number" placeholder="4242 4242 4242 4242" style="width: 200px;" ><br />
-セキュリティコード:<input type="text" name="security_code" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="333"><br />
-カードの有効期限(月):<input type="text" name="expired_month" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="09"><br />
-カードの有効期限(年):<input type="text" name="expired_year" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="2027"><br />
-<input type="submit" value="支払う">
+<input type="hidden" name="amount" id="credit_card_amount" value="" />
+<input type="hidden" name="token" id="token" value="" />
 </form>
 </div>
 <hr />
 <div id="credit-card-omise">
-カード決済(Omise pre build):
+  Credit Card Charge(Omise PreBuild Form):
 <form method=POST action="/omise/charge_card_omise">
   {% csrf_token %}
   <script type="text/javascript" src="https://cdn.omise.co/omise.js"
@@ -267,11 +271,11 @@ function getGoogleTransactionInfo() {
 </div>
 <hr />
 <div id="credit-card-opnpayment">
-  カード決済(Omise PreBuild Form another):
+  Credit Card Charge(Omise PreBuild Form another):
   
   <form id="checkoutForm" method="POST" action="/omise/charge_card_omise_another">
-  {% csrf_token %}
-  金額:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');"> <br />
+    {% csrf_token %}
+    Amount:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');"> <br />
   
     <input type="hidden" name="omiseToken">
     <input type="hidden" name="omiseSource">
@@ -280,21 +284,21 @@ function getGoogleTransactionInfo() {
 </div>
 <hr />
 <div id="paypay">
-PayPay決済:
-<form method=POST action="/omise/charge/paypay">
-{% csrf_token %}
-金額:<input type="text" name="money" oninput="value = value.replace(/[^0-9]+/i,'');"><br />
-<input type="submit" value="支払う">
-</form>
+  PayPay Charge(Create Source and Charge at the same time):
+  <form method=POST action="/omise/charge/paypay">
+  {% csrf_token %}
+  Amount:<input type="text" name="money" oninput="value = value.replace(/[^0-9]+/i,'');"><br />
+  <input type="submit" value="支払う">
+  </form>
 </div>
 <hr />
 <div id="paypay-another">
-PayPay決済(ソースと課金は別):
-<form method=POST action="/omise/charge/paypay_another">
-{% csrf_token %}
-金額:<input type="text" name="money" oninput="value = value.replace(/[^0-9]+/i,'');"><br />
-<input type="submit" value="支払う">
-</form>
+  PayPay Charge(Create source, then Create Charge):
+  <form method=POST action="/omise/charge/paypay_another">
+  {% csrf_token %}
+  Amount:<input type="text" name="money" oninput="value = value.replace(/[^0-9]+/i,'');"><br />
+  <input type="submit" value="支払う">
+  </form>
 </div>
 <hr />
 <div id="googlepay">
@@ -345,4 +349,34 @@ function inputCreditCard(e) {
     }
     e.target.value = v;
 }
+
+function createToken() {
+  var cardNumber = document.querySelector('[name="card_number"]').value;
+  var name = document.querySelector('[name="name"]').value;
+  var money = document.querySelector('[name="money"]').value;
+  var securityCode = document.querySelector('[name="security_code"]').value;
+  var expiredMonth = document.querySelector('[name="expired_month"]').value;
+  var expiredYear = document.querySelector('[name="expired_year"]').value;
+
+  var form = document.querySelector("#creditCardCharge");
+
+  Omise.setPublicKey("{{ settings.OMISE_PUBLIC_KEY }}");
+  Omise.createToken("card",
+  {
+    "expiration_month": expiredMonth,
+    "expiration_year": expiredYear,
+    "name": name,
+    "number": cardNumber.trim(),
+    "security_code": securityCode,
+  },
+  function(statusCode, response) {
+    // console.log(response["id"])
+
+    document.querySelector('[name="amount"]').value = money;
+    document.querySelector('[name="token"]').value = response["id"];
+
+    form.submit();
+  });
+}  
+
 </script>
