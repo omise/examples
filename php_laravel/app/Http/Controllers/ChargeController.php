@@ -32,7 +32,7 @@ class ChargeController extends Controller
         ]);
 
         // print_r($charge);
-        $this->savePaymentInfo($strPaymentId, $charge['id'], 'paypay');
+        $this->savePaymentInfo($strPaymentId, $charge['id'], 'credit_card');
 
         return view('charge-result', ['charge'=>$charge]);
     }
@@ -52,7 +52,7 @@ class ChargeController extends Controller
         ]);
 
         // print_r($charge);
-        $this->savePaymentInfo($strPaymentId, $charge['id'], 'paypay');
+        $this->savePaymentInfo($strPaymentId, $charge['id'], 'credit_card');
 
 
         return view('charge-result', ['charge'=>$charge]);
@@ -73,7 +73,7 @@ class ChargeController extends Controller
         ]);
 
         // print_r($charge);
-        $this->savePaymentInfo($strPaymentId, $charge['id'], 'paypay');
+        $this->savePaymentInfo($strPaymentId, $charge['id'], 'credit_card');
 
 
         return view('charge-result', ['charge'=>$charge]);

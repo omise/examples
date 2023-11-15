@@ -310,6 +310,8 @@ Google Pay:
 <input type="hidden" name="card_id" id="card_id" value="" />
 </form>
 </div> 
+<hr />
+<a href="myapp://test">Open my app</a>
 </body>
 </html>
 
