@@ -36,6 +36,11 @@ To use the plugin, add omise as a [dependency in your pubspec.yaml file](https:/
 - iOS
 - Android
 
+# Configuration
+
+Copy android/local.properties.example to android/local.properties
+And pet Android and Flutter SDK based on your environment
+
 # Usage
 
 In order to create a credit card charge, you need to create token beforehand.
