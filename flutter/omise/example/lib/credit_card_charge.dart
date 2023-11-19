@@ -145,7 +145,7 @@ class _CreditCardChargeState extends State<CreditCardCharge> with WidgetsBinding
       _goToChargeReturn();
 
     } catch(e){
-      print(e); 
+      debugPrint(e.toString()); 
       setState(() {
         isLoading = false;
       });

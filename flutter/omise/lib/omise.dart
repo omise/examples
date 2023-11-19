@@ -3,57 +3,108 @@ library omise;
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+class OmiseError implements Exception {
+  final Object error;
+
+  OmiseError(this.error);
+
+  @override
+  String toString() {
+    return 'OmiseError: $error';
+  }
+}
+
 class Omise {
-  
-  // Create Credit Card token
-  static Future<http.Response> createToken(String omisePubKey
-                                          , String strName
-                                          , String strCardNumber
-                                          , String expMonth
-                                          , String expYear
-                                          , String securityCode) async{
-                                              
-    var url = "https://vault.omise.co/tokens";
-    var requestTokenUrl = Uri.parse(url);
-    String basicAuth = 'Basic ${base64.encode(utf8.encode('$omisePubKey:'))}';
+  static const String _vaultUrl = "https://vault.omise.co";
+  static const String _apiUrl = "https://api.omise.co";
 
-    Map<String, dynamic> cardInfos = {
-      "card[name]": strName,
-      "card[number]": strCardNumber,
-      "card[expiration_month]": expMonth,
-      "card[expiration_year]": expYear,
-      "card[security_code]": securityCode,
-    };
+  final String _omisePubKey;
 
-    return await http.post(
-      requestTokenUrl,
-      headers: <String, String>{
-        'authorization': basicAuth,
-      },
-      body: cardInfos,
-    );
+  Omise(this._omisePubKey);
+
+  Future<String> createToken({
+    required String strName,
+    required String strCardNumber,
+    required String expMonth,
+    required String expYear,
+    required String securityCode,
+  }) async {
+    try {
+      final requestTokenUrl = Uri.parse("$_vaultUrl/tokens");
+      final basicAuth = _getBasicAuth();
+
+      final Map<String, String> cardInfo = {
+        "card[name]": strName,
+        "card[number]": strCardNumber,
+        "card[expiration_month]": expMonth,
+        "card[expiration_year]": expYear,
+        "card[security_code]": securityCode,
+      };
+
+      final response = await http.post(
+        requestTokenUrl,
+        headers: <String, String>{
+          'authorization': basicAuth,
+        },
+        body: cardInfo,
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> tokenData = jsonDecode(response.body);
+        return tokenData['id'] as String;
+      } else {
+        throw OmiseError(
+            "Failed to create token. Status code: ${response.statusCode}");
+      }
+    } catch (error) {
+      if (error is OmiseError) {
+        rethrow;
+      } else {
+        throw OmiseError(error);
+      }
+    }
   }
 
-  
-  // Create APM Source
-  static Future<http.Response> createSource(String omisePubKey, int intAmount, String strCurrency, String strType) async {
+  Future<String> createSource({
+    required int intAmount,
+    required String strCurrency,
+    required String strType,
+  }) async {
+    try {
+      final requestSourceUrl = Uri.parse("$_apiUrl/sources");
+      final basicAuth = _getBasicAuth();
 
-    String requestTokenUrl = "https://api.omise.co/sources";
-    String basicAuth = 'Basic ${base64.encode(utf8.encode('$omisePubKey:'))}';
+      final Map<String, dynamic> sourceInfo = {
+        "type": strType,
+        "currency": strCurrency,
+        "amount": intAmount,
+      };
 
-    Map<String, dynamic> sourceInfos = {
-      "type": strType,
-      "currency": strCurrency,
-      "amount": intAmount,
-    };
+      final response = await http.post(
+        requestSourceUrl,
+        headers: <String, String>{
+          'authorization': basicAuth,
+        },
+        body: sourceInfo,
+      );
 
-    return await http.post(
-      Uri.parse(requestTokenUrl),
-      headers: <String, String>{
-        'authorization': basicAuth,
-      },
-      body: sourceInfos,
-    );
+      if (response.statusCode == 200) {
+        final sourceData = jsonDecode(response.body) as Map<String, dynamic>;
+        return sourceData['id'] as String;
+      } else {
+        throw OmiseError(
+            "Failed to create source. Status code: ${response.statusCode}");
+      }
+    } catch (error) {
+      if (error is OmiseError) {
+        rethrow;
+      } else {
+        throw OmiseError(error);
+      }
+    }
   }
-  
+
+  String _getBasicAuth() {
+    return 'Basic ${base64.encode(utf8.encode('$_omisePubKey:'))}';
+  }
 }

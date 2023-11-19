@@ -6,7 +6,7 @@ import 'package:example/paypay_charge.dart';
 
 enum TabItem {
   creditCard(
-    title: 'CreditCard Charge',
+    title: 'Credit Card Charge',
     icon: Icons.home,
     page: CreditCardCharge(title: 'Credit Card'),
   ),
