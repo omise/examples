@@ -5,19 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:uni_links/uni_links.dart';
 
 bool _initialUriIsHandled = false;
 
-
-
 Future main() async {
-  // To load the .env file contents into dotenv.
-  // NOTE: fileName defaults to .env and can be omitted in this case.
-  // Ensure that the filename corresponds to the path in step 1 and 2.
-  await dotenv.load(fileName: ".env");
-  //...runapp
   runApp(MyApp());
 }
 
@@ -32,8 +24,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
-
-  
   Uri? _initialUri;
   Uri? _latestUri;
   Object? _err;
@@ -47,7 +37,6 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     _handleIncomingLinks();
     _handleInitialUri();
   }
-  
 
   @override
   void dispose() {
@@ -63,14 +52,14 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       // the foreground or in the background.
       _sub = uriLinkStream.listen((Uri? uri) {
         if (!mounted) return;
-        print('got uri: $uri');
+        debugPrint('got uri: $uri');
         setState(() {
           _latestUri = uri;
           _err = null;
         });
       }, onError: (Object err) {
         if (!mounted) return;
-        print('got err: $err');
+        debugPrint('got err: $err');
         setState(() {
           _latestUri = null;
           if (err is FormatException) {
@@ -111,18 +100,18 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       try {
         final uri = await getInitialUri();
         if (uri == null) {
-          print('no initial uri');
+          debugPrint('no initial uri');
         } else {
-          print('got initial uri: $uri');
+          debugPrint('got initial uri: $uri');
         }
         if (!mounted) return;
         setState(() => _initialUri = uri);
       } on PlatformException {
         // Platform messages may fail but we ignore the exception
-        print('falied to get initial uri');
+        debugPrint('failed to get initial uri');
       } on FormatException catch (err) {
         if (!mounted) return;
-        print('malformed initial uri');
+        debugPrint('malformed initial uri');
         setState(() => _err = err);
       }
     }
@@ -138,4 +127,3 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     );
   }
 }
-

@@ -104,7 +104,7 @@ class _ChargeReturnState extends State<ChargeReturn> {
       strStatus = objViewModel.dicOmise["status"];
       
     } catch(e){
-      print(e); 
+      debugPrint(e.toString()); 
       
       showTextDialog(context, "Failed Credit Card Charge");
 

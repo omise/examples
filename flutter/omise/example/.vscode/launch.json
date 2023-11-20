@@ -7,19 +7,34 @@
     {
       "name": "example",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "args": [
+        "--dart-define=OMISE_PUB_KEY=pkey_123",
+        "--dart-define=API_HOST_ANDROID=http://10.0.2.2",
+        "--dart-define=API_HOST=http://localhost"
+      ]
     },
     {
       "name": "example (profile mode)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "profile"
+      "flutterMode": "profile",
+      "args": [
+        "--dart-define=OMISE_PUB_KEY=pkey_123",
+        "--dart-define=API_HOST_ANDROID=http://10.0.2.2",
+        "--dart-define=API_HOST=http://localhost"
+      ]
     },
     {
       "name": "example (release mode)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "release"
+      "flutterMode": "release",
+      "args": [
+        "--dart-define=OMISE_PUB_KEY=pkey_123",
+        "--dart-define=API_HOST_ANDROID=http://10.0.2.2",
+        "--dart-define=API_HOST=http://localhost"
+      ]
     }
   ]
 }

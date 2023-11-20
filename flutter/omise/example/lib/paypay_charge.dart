@@ -151,7 +151,7 @@ class _PayPayChargeState extends State<PayPayCharge>  with WidgetsBindingObserve
         isLoading = false;
       });
     } catch(e){
-      print(e); 
+      debugPrint(e.toString()); 
       setState(() {
         isLoading = false;
       });
@@ -184,7 +184,7 @@ class _PayPayChargeState extends State<PayPayCharge>  with WidgetsBindingObserve
         isLoading = false;
       });
     } catch(e){
-      print(e); 
+      debugPrint(e.toString()); 
       setState(() {
         isLoading = false;
       });
