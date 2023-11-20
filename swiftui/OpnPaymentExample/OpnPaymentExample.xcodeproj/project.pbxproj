@@ -1,0 +1,672 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		707CC2452AC2BCEA00D7ABB7 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CC2442AC2BCEA00D7ABB7 /* Util.swift */; };
+		707CC2482AC2C37600D7ABB7 /* OmiseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CC2472AC2C37600D7ABB7 /* OmiseModel.swift */; };
+		707CC24A2AC5078D00D7ABB7 /* UserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CC2492AC5078D00D7ABB7 /* UserDefaultsWrapper.swift */; };
+		707CC24E2ACBFBAA00D7ABB7 /* ChargeReturnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CC24D2ACBFBAA00D7ABB7 /* ChargeReturnView.swift */; };
+		707CC2502ACBFBE600D7ABB7 /* URLSchemeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CC24F2ACBFBE600D7ABB7 /* URLSchemeApp.swift */; };
+		70AA94C92ACE5C100010CF55 /* PayPayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AA94C82ACE5C100010CF55 /* PayPayView.swift */; };
+		70AA94CB2ACE8B860010CF55 /* OmiseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AA94CA2ACE8B860010CF55 /* OmiseViewModel.swift */; };
+		70AA94CD2AD4D8520010CF55 /* GooglePaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AA94CC2AD4D8520010CF55 /* GooglePaymentView.swift */; };
+		70AA94CF2AD90DF50010CF55 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AA94CE2AD90DF50010CF55 /* ActivityIndicator.swift */; };
+		70D248F52AB974440017A167 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D248F42AB974440017A167 /* ContentView.swift */; };
+		70D248F72AB974450017A167 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D248F62AB974450017A167 /* Assets.xcassets */; };
+		70D248FA2AB974450017A167 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D248F92AB974450017A167 /* Preview Assets.xcassets */; };
+		70D249042AB974450017A167 /* OpnPaymentExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D249032AB974450017A167 /* OpnPaymentExampleTests.swift */; };
+		70D2490E2AB974450017A167 /* OpnPaymentExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D2490D2AB974450017A167 /* OpnPaymentExampleUITests.swift */; };
+		70D249102AB974450017A167 /* OpnPaymentExampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D2490F2AB974450017A167 /* OpnPaymentExampleUITestsLaunchTests.swift */; };
+		70D2491E2AB97E4E0017A167 /* OmiseSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 70D2491D2AB97E4E0017A167 /* OmiseSDK */; };
+		70D2491F2AB97FA00017A167 /* OmiseSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 70D2491D2AB97E4E0017A167 /* OmiseSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		70D249222ABA714A0017A167 /* CreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D249212ABA714A0017A167 /* CreditCardView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		70D249002AB974450017A167 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 70D248E72AB974440017A167 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 70D248EE2AB974440017A167;
+			remoteInfo = OpnPaymentExample;
+		};
+		70D2490A2AB974450017A167 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 70D248E72AB974440017A167 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 70D248EE2AB974440017A167;
+			remoteInfo = OpnPaymentExample;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		70D249202AB97FA00017A167 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				70D2491F2AB97FA00017A167 /* OmiseSDK in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		707CC2442AC2BCEA00D7ABB7 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		707CC2462AC2BF2F00D7ABB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		707CC2472AC2C37600D7ABB7 /* OmiseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseModel.swift; sourceTree = "<group>"; };
+		707CC2492AC5078D00D7ABB7 /* UserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWrapper.swift; sourceTree = "<group>"; };
+		707CC24D2ACBFBAA00D7ABB7 /* ChargeReturnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeReturnView.swift; sourceTree = "<group>"; };
+		707CC24F2ACBFBE600D7ABB7 /* URLSchemeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeApp.swift; sourceTree = "<group>"; };
+		70AA94C82ACE5C100010CF55 /* PayPayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPayView.swift; sourceTree = "<group>"; };
+		70AA94CA2ACE8B860010CF55 /* OmiseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseViewModel.swift; sourceTree = "<group>"; };
+		70AA94CC2AD4D8520010CF55 /* GooglePaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePaymentView.swift; sourceTree = "<group>"; };
+		70AA94CE2AD90DF50010CF55 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		70D248EF2AB974440017A167 /* OpnPaymentExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpnPaymentExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		70D248F42AB974440017A167 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		70D248F62AB974450017A167 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		70D248F92AB974450017A167 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		70D248FF2AB974450017A167 /* OpnPaymentExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpnPaymentExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		70D249032AB974450017A167 /* OpnPaymentExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpnPaymentExampleTests.swift; sourceTree = "<group>"; };
+		70D249092AB974450017A167 /* OpnPaymentExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpnPaymentExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		70D2490D2AB974450017A167 /* OpnPaymentExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpnPaymentExampleUITests.swift; sourceTree = "<group>"; };
+		70D2490F2AB974450017A167 /* OpnPaymentExampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpnPaymentExampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		70D249212ABA714A0017A167 /* CreditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		70D248EC2AB974440017A167 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70D2491E2AB97E4E0017A167 /* OmiseSDK in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70D248FC2AB974450017A167 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70D249062AB974450017A167 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		70D248E62AB974440017A167 = {
+			isa = PBXGroup;
+			children = (
+				70D248F12AB974440017A167 /* OpnPaymentExample */,
+				70D249022AB974450017A167 /* OpnPaymentExampleTests */,
+				70D2490C2AB974450017A167 /* OpnPaymentExampleUITests */,
+				70D248F02AB974440017A167 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		70D248F02AB974440017A167 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				70D248EF2AB974440017A167 /* OpnPaymentExample.app */,
+				70D248FF2AB974450017A167 /* OpnPaymentExampleTests.xctest */,
+				70D249092AB974450017A167 /* OpnPaymentExampleUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		70D248F12AB974440017A167 /* OpnPaymentExample */ = {
+			isa = PBXGroup;
+			children = (
+				707CC2462AC2BF2F00D7ABB7 /* Info.plist */,
+				70D248F42AB974440017A167 /* ContentView.swift */,
+				70D249212ABA714A0017A167 /* CreditCardView.swift */,
+				70AA94C82ACE5C100010CF55 /* PayPayView.swift */,
+				707CC24D2ACBFBAA00D7ABB7 /* ChargeReturnView.swift */,
+				70D248F62AB974450017A167 /* Assets.xcassets */,
+				70D248F82AB974450017A167 /* Preview Content */,
+				707CC2442AC2BCEA00D7ABB7 /* Util.swift */,
+				707CC2472AC2C37600D7ABB7 /* OmiseModel.swift */,
+				707CC2492AC5078D00D7ABB7 /* UserDefaultsWrapper.swift */,
+				707CC24F2ACBFBE600D7ABB7 /* URLSchemeApp.swift */,
+				70AA94CA2ACE8B860010CF55 /* OmiseViewModel.swift */,
+				70AA94CC2AD4D8520010CF55 /* GooglePaymentView.swift */,
+				70AA94CE2AD90DF50010CF55 /* ActivityIndicator.swift */,
+			);
+			path = OpnPaymentExample;
+			sourceTree = "<group>";
+		};
+		70D248F82AB974450017A167 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				70D248F92AB974450017A167 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		70D249022AB974450017A167 /* OpnPaymentExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				70D249032AB974450017A167 /* OpnPaymentExampleTests.swift */,
+			);
+			path = OpnPaymentExampleTests;
+			sourceTree = "<group>";
+		};
+		70D2490C2AB974450017A167 /* OpnPaymentExampleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				70D2490D2AB974450017A167 /* OpnPaymentExampleUITests.swift */,
+				70D2490F2AB974450017A167 /* OpnPaymentExampleUITestsLaunchTests.swift */,
+			);
+			path = OpnPaymentExampleUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		70D248EE2AB974440017A167 /* OpnPaymentExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70D249132AB974450017A167 /* Build configuration list for PBXNativeTarget "OpnPaymentExample" */;
+			buildPhases = (
+				70D248EB2AB974440017A167 /* Sources */,
+				70D248EC2AB974440017A167 /* Frameworks */,
+				70D248ED2AB974440017A167 /* Resources */,
+				70D249202AB97FA00017A167 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpnPaymentExample;
+			packageProductDependencies = (
+				70D2491D2AB97E4E0017A167 /* OmiseSDK */,
+			);
+			productName = OpnPaymentExample;
+			productReference = 70D248EF2AB974440017A167 /* OpnPaymentExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		70D248FE2AB974450017A167 /* OpnPaymentExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70D249162AB974450017A167 /* Build configuration list for PBXNativeTarget "OpnPaymentExampleTests" */;
+			buildPhases = (
+				70D248FB2AB974450017A167 /* Sources */,
+				70D248FC2AB974450017A167 /* Frameworks */,
+				70D248FD2AB974450017A167 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				70D249012AB974450017A167 /* PBXTargetDependency */,
+			);
+			name = OpnPaymentExampleTests;
+			productName = OpnPaymentExampleTests;
+			productReference = 70D248FF2AB974450017A167 /* OpnPaymentExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		70D249082AB974450017A167 /* OpnPaymentExampleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70D249192AB974450017A167 /* Build configuration list for PBXNativeTarget "OpnPaymentExampleUITests" */;
+			buildPhases = (
+				70D249052AB974450017A167 /* Sources */,
+				70D249062AB974450017A167 /* Frameworks */,
+				70D249072AB974450017A167 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				70D2490B2AB974450017A167 /* PBXTargetDependency */,
+			);
+			name = OpnPaymentExampleUITests;
+			productName = OpnPaymentExampleUITests;
+			productReference = 70D249092AB974450017A167 /* OpnPaymentExampleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		70D248E72AB974440017A167 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1410;
+				LastUpgradeCheck = 1410;
+				TargetAttributes = {
+					70D248EE2AB974440017A167 = {
+						CreatedOnToolsVersion = 14.1;
+					};
+					70D248FE2AB974450017A167 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 70D248EE2AB974440017A167;
+					};
+					70D249082AB974450017A167 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 70D248EE2AB974440017A167;
+					};
+				};
+			};
+			buildConfigurationList = 70D248EA2AB974440017A167 /* Build configuration list for PBXProject "OpnPaymentExample" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 70D248E62AB974440017A167;
+			packageReferences = (
+				70D2491C2AB97E4E0017A167 /* XCRemoteSwiftPackageReference "omise-ios" */,
+			);
+			productRefGroup = 70D248F02AB974440017A167 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				70D248EE2AB974440017A167 /* OpnPaymentExample */,
+				70D248FE2AB974450017A167 /* OpnPaymentExampleTests */,
+				70D249082AB974450017A167 /* OpnPaymentExampleUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		70D248ED2AB974440017A167 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70D248FA2AB974450017A167 /* Preview Assets.xcassets in Resources */,
+				70D248F72AB974450017A167 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70D248FD2AB974450017A167 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70D249072AB974450017A167 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		70D248EB2AB974440017A167 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				707CC2482AC2C37600D7ABB7 /* OmiseModel.swift in Sources */,
+				70AA94CD2AD4D8520010CF55 /* GooglePaymentView.swift in Sources */,
+				70D248F52AB974440017A167 /* ContentView.swift in Sources */,
+				707CC2452AC2BCEA00D7ABB7 /* Util.swift in Sources */,
+				707CC24E2ACBFBAA00D7ABB7 /* ChargeReturnView.swift in Sources */,
+				70AA94CF2AD90DF50010CF55 /* ActivityIndicator.swift in Sources */,
+				707CC24A2AC5078D00D7ABB7 /* UserDefaultsWrapper.swift in Sources */,
+				70AA94C92ACE5C100010CF55 /* PayPayView.swift in Sources */,
+				707CC2502ACBFBE600D7ABB7 /* URLSchemeApp.swift in Sources */,
+				70AA94CB2ACE8B860010CF55 /* OmiseViewModel.swift in Sources */,
+				70D249222ABA714A0017A167 /* CreditCardView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70D248FB2AB974450017A167 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70D249042AB974450017A167 /* OpnPaymentExampleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70D249052AB974450017A167 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70D249102AB974450017A167 /* OpnPaymentExampleUITestsLaunchTests.swift in Sources */,
+				70D2490E2AB974450017A167 /* OpnPaymentExampleUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		70D249012AB974450017A167 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 70D248EE2AB974440017A167 /* OpnPaymentExample */;
+			targetProxy = 70D249002AB974450017A167 /* PBXContainerItemProxy */;
+		};
+		70D2490B2AB974450017A167 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 70D248EE2AB974440017A167 /* OpnPaymentExample */;
+			targetProxy = 70D2490A2AB974450017A167 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		70D249112AB974450017A167 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		70D249122AB974450017A167 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		70D249142AB974450017A167 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"OpnPaymentExample/Preview Content\"";
+				DEVELOPMENT_TEAM = 3D45UD7493;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OpnPaymentExample/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ooo.opn.opn-payment.example.swiftui.OpnPaymentExample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		70D249152AB974450017A167 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"OpnPaymentExample/Preview Content\"";
+				DEVELOPMENT_TEAM = 3D45UD7493;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OpnPaymentExample/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ooo.opn.opn-payment.example.swiftui.OpnPaymentExample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		70D249172AB974450017A167 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3D45UD7493;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ooo.opn.opn-payment.example.swiftui.OpnPaymentExampleTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpnPaymentExample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OpnPaymentExample";
+			};
+			name = Debug;
+		};
+		70D249182AB974450017A167 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3D45UD7493;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ooo.opn.opn-payment.example.swiftui.OpnPaymentExampleTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpnPaymentExample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OpnPaymentExample";
+			};
+			name = Release;
+		};
+		70D2491A2AB974450017A167 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3D45UD7493;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ooo.opn.opn-payment.example.swiftui.OpnPaymentExampleUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OpnPaymentExample;
+			};
+			name = Debug;
+		};
+		70D2491B2AB974450017A167 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3D45UD7493;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ooo.opn.opn-payment.example.swiftui.OpnPaymentExampleUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OpnPaymentExample;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		70D248EA2AB974440017A167 /* Build configuration list for PBXProject "OpnPaymentExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70D249112AB974450017A167 /* Debug */,
+				70D249122AB974450017A167 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		70D249132AB974450017A167 /* Build configuration list for PBXNativeTarget "OpnPaymentExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70D249142AB974450017A167 /* Debug */,
+				70D249152AB974450017A167 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		70D249162AB974450017A167 /* Build configuration list for PBXNativeTarget "OpnPaymentExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70D249172AB974450017A167 /* Debug */,
+				70D249182AB974450017A167 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		70D249192AB974450017A167 /* Build configuration list for PBXNativeTarget "OpnPaymentExampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70D2491A2AB974450017A167 /* Debug */,
+				70D2491B2AB974450017A167 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		70D2491C2AB97E4E0017A167 /* XCRemoteSwiftPackageReference "omise-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/omise/omise-ios.git";
+			requirement = {
+				branch = "feature/MIT-2006";
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		70D2491D2AB97E4E0017A167 /* OmiseSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 70D2491C2AB97E4E0017A167 /* XCRemoteSwiftPackageReference "omise-ios" */;
+			productName = OmiseSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 70D248E72AB974440017A167 /* Project object */;
+}
