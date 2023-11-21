@@ -20,18 +20,18 @@ https://docs.opn.ooo/paypay/japan
 The first step is to clone the repo:
 
 ```
-git clone git@github.com:opn-ooo/omise_example_prroject.git
+git clone git@github.com:omise/examples.git 
 ```
 
 ```
-cd omise_example_prroject/swift_ui/OpnPaymentExample
+cd examples/swiftui/OpnPaymentExample
 ```
 
 Install OmiseSDK via Package Manager.
 
 # Need to prepare
 
-This example uses [this one](https://github.com/opn-ooo/omise_example_prroject/tree/master/nextjs) as a backend API.
+This example uses [this one](https://github.com/omise/examples/tree/master/nextjs) as a backend API.
 
 Please prepare it beforehand at your local.
 
