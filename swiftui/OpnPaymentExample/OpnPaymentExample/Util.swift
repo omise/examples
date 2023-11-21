@@ -28,6 +28,36 @@ func randomAlphanumericString(_ length: Int) -> String {
    return randomString
 }
 
+enum HomePath: Int{
+    case creditcard, paypay, chargereturn
+    
+    var toString: String{
+        ["CreditCard", "PayPay", "ChargeReturn"][self.rawValue]
+    }
+    
+    @ViewBuilder
+    func Destination(strPaymentId: String) -> some View{
+        switch self {
+        case .creditcard: CreditCardView()
+        case .chargereturn: ChargeReturnView(strPaymentId: strPaymentId)
+        case .paypay: PayPayView()
+        
+        }
+    }
+}
+
+enum OmiseActionError: Error {
+    case invalidRequest
+    case invalidResponse
+    case systemError
+    case failParse
+    case failGetToken
+    case failMakeRequest
+    case failCharged
+    case failParseWithMessage( error: Error )
+}
+
+
 class OmiseClientForSwiftUI{
     
     let session: URLSession
@@ -54,7 +84,7 @@ class OmiseClientForSwiftUI{
     static let currentDevice: String = UIDevice.current.model
     
     
-    public init(publicKey: String) {
+    init(publicKey: String) {
         if publicKey.hasPrefix("pkey_") {
             self.publicKey = publicKey
         } else {
@@ -69,16 +99,10 @@ class OmiseClientForSwiftUI{
         )
     }
     
-    public func asynnSend<T: CreatableObject>(with request: Request<T>) async -> (Data?, URLResponse?) {
+    func asynnSend<T: CreatableObject>(with request: Request<T>) async throws -> (Data?, URLResponse?) {
         
-        do{
-            let (data, error) = try await session.data(for: buildCustomURLRequest(for: request))
-            return (data, error)
-        }catch{
-            
-        }
-        
-        return (nil, nil)
+        let (data, error) = try await session.data(for: buildCustomURLRequest(for: request))
+        return (data, error)
     }
     
     

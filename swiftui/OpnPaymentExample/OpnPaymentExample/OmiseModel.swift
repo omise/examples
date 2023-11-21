@@ -89,17 +89,23 @@ class OmiseModel {
         let request = Request<Source>(parameter: sourceParameter)
         
         // data(from:delegate:)はasyncメソッドのため、呼び出し時に await が必要
-        let responseData = await clientSwiftUI?.asynnSend(with: request)
+        let responseData = try await clientSwiftUI?.asynnSend(with: request)
         
-        if let dataSource = responseData?.0, let tmpURLResponse = responseData?.1, let resultHttpResponse = tmpURLResponse as? HTTPURLResponse {
+        if let dataSource = responseData?.0,
+           let tmpURLResponse = responseData?.1,
+           let resultHttpResponse = tmpURLResponse as? HTTPURLResponse {
+            
+            if resultHttpResponse.statusCode == 400 {
+                throw OmiseActionError.invalidRequest
+            }
             
             if resultHttpResponse.statusCode != 200 {
-                
+                throw OmiseActionError.systemError
             }
             
             let url: URL = URL(string: ConfigEnv.API_HOST + "/api/charge-by-source")!
             
-            print(dataSource)
+//            print(dataSource)
             
             let decoder = JSONDecoder()
             
@@ -108,7 +114,7 @@ class OmiseModel {
             let data: [String: Any] = ["amount": intAmount, "returnUri": strReturnUrl, "paymentId": strPaymentId, "source": source.id]
             guard let httpBody = try? JSONSerialization.data(withJSONObject: data, options: [])
             else {
-                return
+                throw OmiseActionError.failParse
             }
 
             
@@ -128,7 +134,7 @@ class OmiseModel {
                 }
             }
         }else{
-            
+            throw OmiseActionError.invalidResponse
         }
                 
     }
@@ -148,12 +154,18 @@ class OmiseModel {
         
         let request = Request<Token>(parameter: tokenParameter)
         
-        let responseData = await clientSwiftUI?.asynnSend(with: request)
+        let responseData = try await clientSwiftUI?.asynnSend(with: request)
         
-        if let dataToken = responseData?.0, let tmpURLResponse = responseData?.1, let resultHttpResponse = tmpURLResponse as? HTTPURLResponse {
+        if let dataToken = responseData?.0,
+           let tmpURLResponse = responseData?.1,
+           let resultHttpResponse = tmpURLResponse as? HTTPURLResponse {
+            
+            if resultHttpResponse.statusCode == 400 {
+                throw OmiseActionError.invalidRequest
+            }
             
             if resultHttpResponse.statusCode != 200 {
-                
+                throw OmiseActionError.systemError
             }
             
             // This way got this error.
@@ -174,15 +186,17 @@ class OmiseModel {
 //            let token = try decoder.decode(Token.self, from: dataToken)
             
             guard let dicToken: [String: Any] = try JSONSerialization.jsonObject(with: dataToken) as? [String: Any] else {
-                return
+                throw OmiseActionError.failParse
             }
             guard let tokenId = dicToken["id"] as? String else{
-                return
+                throw OmiseActionError.failGetToken
             }
             
             let url: URL = URL(string: ConfigEnv.API_HOST + "/api/credit-card")!
             let data: [String: Any] = ["amount": intAmount, "returnUri": strReturnUrl, "paymentId": strPaymentId, "token": tokenId]
-            guard let httpBody = try? JSONSerialization.data(withJSONObject: data, options: []) else { return }
+            guard let httpBody = try? JSONSerialization.data(withJSONObject: data, options: []) else {
+                throw OmiseActionError.failMakeRequest
+            }
 
             
             var request = URLRequest(url: url)
@@ -200,33 +214,28 @@ class OmiseModel {
                 }
             }
         }else{
-            
+            throw OmiseActionError.invalidResponse
         }
         
     }
 
     
-    func fetchPayPay(param strPaymentId: String, completion: @escaping([String: Any]?, Error?) -> Void) async {
+    func fetchPayPay(param strPaymentId: String, completion: @escaping([String: Any]?, Error?) -> Void) async throws {
         
         let url: URL = URL(string: ConfigEnv.API_HOST + "/api/charge-retrieve/"+strPaymentId)!
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        do {
-            // data(from:delegate:)はasyncメソッドのため、呼び出し時に await が必要
-            let (data, _) = try await URLSession.shared.data(for: request)
-            DispatchQueue.main.async {
-                do {
-                    let dicModel = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                    completion(dicModel, nil)
-                } catch (let decodingError) {
-                    completion(nil, decodingError)
-                }
+        // data(from:delegate:)はasyncメソッドのため、呼び出し時に await が必要
+        let (data, _) = try await URLSession.shared.data(for: request)
+        DispatchQueue.main.async {
+            do {
+                let dicModel = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                completion(dicModel, nil)
+            } catch (let decodingError) {
+                completion(nil, decodingError)
             }
-            
-        } catch {
-            return
         }
     }
     

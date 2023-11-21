@@ -25,7 +25,7 @@ final class OmiseViewModel: ObservableObject, Equatable {
     @Published var strRedirectUrl: String = ""
     @Published var chargeId: String = ""
     @Published var dicOmise: [String: Any]?
-    
+    @Published var actionError: Error?
     
     func postCreditCardCharge(param intAmount: Int, strName: String, strCardNumber: String, expMonth: String, expYear: String, secCode: String, strReturlUrl: String, strPaymentId: String) async throws {
         
@@ -48,31 +48,39 @@ final class OmiseViewModel: ObservableObject, Equatable {
     }
     
     
-    func fetchChargeInfo(param strPaymentId: String) async {
+    func fetchChargeInfo(param strPaymentId: String) async throws {
         
-        await model.fetchPayPay(param: strPaymentId, completion: completionPayPay)
+        try await model.fetchPayPay(param: strPaymentId, completion: completionPayPay)
     }
     
     
     func completionPayPay(data objData: [String : Any]?, error: Error?) {
+        
+        actionError = error
         
         self.dicOmise = objData
         
         let objRedirectUri = self.dicOmise?["redirectUri"] ?? ""
         
         self.strRedirectUrl = String(describing: objRedirectUri)
+        
     }
     
     func completionCharge(data objData: [String : Any]?, error: Error?) {
+        
+        actionError = error
         
         self.dicOmise = objData
         
         let objChargeId = self.dicOmise?["id"] ?? ""
         
         self.chargeId = String(describing: objChargeId)
+        
     }
     
     func completionFetch(data objData: [String : Any]?, error: Error?) {
+        
+        actionError = error
         
         self.dicOmise = objData
         

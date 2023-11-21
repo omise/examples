@@ -16,11 +16,15 @@ struct CreditCardView: View {
     @State var expiredMonth = ""
     @State var expiredYear = ""
     @State var strRandom: String = ""
+    @State var strErrormessage: String = ""
     @ObservedObject var viewModel = OmiseViewModel()
     @State private var isDetailViewActive = false
+    @State private var showingAlert = false
+    
+    @State var path = NavigationPath()
     
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $path) {
             ZStack {
                 if viewModel.isProgress{
                     ActivityIndicator()
@@ -62,20 +66,26 @@ struct CreditCardView: View {
                         Task {
                             await sendCharge(yourName: name, cardNumber: cardNumber, amount: amount, expMonth: expiredMonth, expYear: expiredYear, securityCode: securityCode)
                         }
+                    }.alert(strErrormessage, isPresented: $showingAlert) {
+                        Button("OK", role: .cancel) {
+                            showingAlert = false
+                        }
                     }
-                    NavigationLink(
-                        destination: ChargeReturnView(strPaymentId: strRandom),
-                        isActive: $isDetailViewActive
-                    ) {
-                        Text("").hidden()
-                    }
+                    
                     
                 }
                 .onReceive(self.viewModel.$chargeId, perform: { chargeId in
                     if chargeId != ""{
                         self.isDetailViewActive = true
                         
+                        
                     }
+                }).navigationTitle("CreditCard Charge")
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationDestination(for: HomePath.self, destination: { appended in
+                    appended.Destination(strPaymentId: strRandom)
+                        .navigationTitle(appended.toString)
+                        .navigationBarTitleDisplayMode(.inline)
                 })
             }
             
@@ -97,8 +107,34 @@ struct CreditCardView: View {
         
         do {
             try await viewModel.postCreditCardCharge(param: Int(amount) ?? 0, strName: name, strCardNumber: cardNumber, expMonth: expMonth, expYear: expYear, secCode: securityCode, strReturlUrl: returnUri, strPaymentId: strRandom)
-        }catch {
-            print(error)
+            
+            if let constError = viewModel.actionError{
+                throw OmiseActionError.failParseWithMessage(error: constError)
+            }
+            
+            path.append(HomePath.chargereturn)
+        } catch OmiseActionError.invalidRequest {
+            showingAlert = true
+            strErrormessage = "Invalid Request. Check your card or input information"
+        } catch OmiseActionError.systemError {
+            showingAlert = true
+            strErrormessage = "System Error"
+        } catch OmiseActionError.failParse {
+            showingAlert = true
+            strErrormessage = "Failed parse"
+        } catch OmiseActionError.invalidResponse {
+            showingAlert = true
+            strErrormessage = "invalid response or no connection"
+        } catch OmiseActionError.failMakeRequest {
+            showingAlert = true
+            strErrormessage = "Failed making request"
+        } catch OmiseActionError.failParseWithMessage(let objError) {
+            showingAlert = true
+            strErrormessage = "Unexpected error: \(objError)."
+        } catch {
+            showingAlert = true
+            strErrormessage = "Unexpected error: \(error)."
+            
         }
         
         
