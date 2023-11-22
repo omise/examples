@@ -11,8 +11,8 @@ import OmiseSDK
 import os
 
 class ConfigEnv {
-    static let OMISE_PUBLIC_KEY = ProcessInfo.processInfo.environment["OMISE_PUBLIC_KEY"] ?? ""
-    static let API_HOST = ProcessInfo.processInfo.environment["API_HOST"] ?? ""
+    static let OMISE_PUBLIC_KEY = Bundle.main.infoDictionary?["OMISE_PUB_KEY"] as? String ?? ""
+    static let API_HOST = Bundle.main.infoDictionary?["API_HOST"] as? String ?? ""
 }
 
 func randomAlphanumericString(_ length: Int) -> String {

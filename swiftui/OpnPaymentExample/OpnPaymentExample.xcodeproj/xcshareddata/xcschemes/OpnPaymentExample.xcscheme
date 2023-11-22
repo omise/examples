@@ -73,18 +73,6 @@
             ReferencedContainer = "container:OpnPaymentExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "OMISE_PUBLIC_KEY"
-            value = "pkey_test_5ss3oz070fptw3tnjny"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "API_HOST"
-            value = "http://localhost:3000"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

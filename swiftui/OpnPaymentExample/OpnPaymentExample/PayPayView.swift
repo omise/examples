@@ -83,6 +83,7 @@ struct PayPayView: View {
     
     func sendPayPayCharge(money amount: Int) async {
         
+        
         // return URLを作成
         strRandom = randomAlphanumericString(10)
         let returnUri = "omise-sample://paypay-return?paymentId="+strRandom
