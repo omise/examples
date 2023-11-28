@@ -38,6 +38,7 @@ dependencies:
   flutter_dotenv: #latest
   uni_links: #latest
   url_launcher: #latest
+  webview_flutter: #latest
   flutter_hooks: ^0.18.5+1
   omise:
     path: ../
