@@ -15,9 +15,7 @@ struct SubModule: Identifiable {
 
 let credit = SubModule(id: 1, key: "creditcard", name: "Credit Card")
 let payPayWay1 = SubModule(id: 2, key: "paypay_way1", name: "PayPay(way 1)")
-//let payPayWay2 = SubModule(id: 3,key: "paypay_way2", name: "PayPay(way 2)")
-//
-//let google = SubModule(id: 4,key: "google_payment", name: "Google Payment")
+let google = SubModule(id: 4,key: "google_payment", name: "Google Payment")
 
 
 struct ContentView: View {
@@ -39,12 +37,12 @@ struct ContentView: View {
                     Text("PayPay")
                 }
                 .tag(1)
-//            GooglePaymentView()
-//                .tabItem {
-//                    Image(systemName: "gearshape")
-//                    Text("Google")
-//                }
-//                .tag(2)
+            GooglePaymentView()
+                .tabItem {
+                    Image(systemName: "gearshape")
+                    Text("Google")
+                }
+                .tag(2)
         }
     }
     

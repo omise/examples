@@ -13,6 +13,7 @@ import os
 class ConfigEnv {
     static let OMISE_PUBLIC_KEY = Bundle.main.infoDictionary?["OMISE_PUB_KEY"] as? String ?? ""
     static let API_HOST = Bundle.main.infoDictionary?["API_HOST"] as? String ?? ""
+    static let GOOGLE_PAYMENT_URL = Bundle.main.infoDictionary?["GOOGLE_PAYMENT_URL"] as? String ?? ""
 }
 
 func randomAlphanumericString(_ length: Int) -> String {

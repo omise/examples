@@ -25,6 +25,7 @@
 		70D2491E2AB97E4E0017A167 /* OmiseSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 70D2491D2AB97E4E0017A167 /* OmiseSDK */; };
 		70D2491F2AB97FA00017A167 /* OmiseSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 70D2491D2AB97E4E0017A167 /* OmiseSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		70D249222ABA714A0017A167 /* CreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D249212ABA714A0017A167 /* CreditCardView.swift */; };
+		70E19C3D2B1456A7000BE845 /* SFSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E19C3C2B1456A7000BE845 /* SFSafariView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		70D249212ABA714A0017A167 /* CreditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardView.swift; sourceTree = "<group>"; };
 		70E19C322B0D8487000BE845 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		70E19C332B0D8792000BE845 /* example.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = example.xcconfig; sourceTree = "<group>"; };
+		70E19C3C2B1456A7000BE845 /* SFSafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSafariView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				70AA94CA2ACE8B860010CF55 /* OmiseViewModel.swift */,
 				70AA94CC2AD4D8520010CF55 /* GooglePaymentView.swift */,
 				70AA94CE2AD90DF50010CF55 /* ActivityIndicator.swift */,
+				70E19C3C2B1456A7000BE845 /* SFSafariView.swift */,
 			);
 			path = OpnPaymentExample;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				70AA94C92ACE5C100010CF55 /* PayPayView.swift in Sources */,
 				707CC2502ACBFBE600D7ABB7 /* URLSchemeApp.swift in Sources */,
 				70AA94CB2ACE8B860010CF55 /* OmiseViewModel.swift in Sources */,
+				70E19C3D2B1456A7000BE845 /* SFSafariView.swift in Sources */,
 				70D249222ABA714A0017A167 /* CreditCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,10 +9,19 @@ import SwiftUI
 
 struct GooglePaymentView: View {
     
-    var dicOmise: [String: Any]?
     
     var body: some View {
-        Text("PayPayReturn")
+        ZStack {
+            VStack(spacing: 0) {
+                
+                
+                SafariWebView().overlay (
+                    RoundedRectangle(cornerRadius: 4, style: .circular)
+                        .stroke(Color.gray, lineWidth: 0.5)
+                ).padding(.leading, 20).padding(.trailing, 20)
+                
+            }
+        }
     }
 }
 
