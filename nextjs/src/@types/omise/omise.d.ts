@@ -39,16 +39,20 @@ export declare type OmiseCreateToken = (
 export interface OmiseTokenParameters {
   city?: string;
   country?: string;
-  expiration_month: number;
-  expiration_year: number;
-  name: string | string;
-  number: string;
+  expiration_month? : number;
+  expiration_year? : number;
+  name? : string | string;
+  number? : string;
   phone_number?: string;
   postal_code?: string;
   security_code?: string;
   state?: string;
   street?: string;
   street2?: string;
+  method?: string;
+  billing_name?: string;
+  billing_street1?: string;
+  data?: any
 }
 export interface Card {
   bank: string;
