@@ -1,6 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+
 import GooglePayButton from '@google-pay/button-react';
 import { loadScript, generateRandomString } from "@/lib/client/util";
 import { useAPICreditCard } from "@/lib/client/api";
@@ -13,8 +16,16 @@ export default function Page() {
 
   const [omise, setOmise] = useState<Omise>();
 
+  const searchParams = useSearchParams()
+  const paramPaymentId = searchParams.get('payment_id') ?? ""
+  const paramDone = searchParams.get('done') ?? ""
+  const amount = searchParams.get('amount') ?? "100"
+  const currencyCode = searchParams.get('currency_code') ?? "JPY"
+  const countryCode = searchParams.get('country_code') ?? "JP"
+  const router = useRouter()
+
+
   // Payment Result
-  const [paymentResult, setPaymentResult] = useState("");
   const creditCard = useAPICreditCard();
   
   // load omise js
@@ -39,11 +50,22 @@ export default function Page() {
       },
       // トークン作成完了
       async (_: any, response: { id: any; }) => {
-        const paymentId= generateRandomString(8)
-        const returnUri = 'http://localhost:3000/paypay-return?payment_id='+paymentId
-        const res = await creditCard(100, response.id);
+        
+        const paymentId= (paramPaymentId != "") ? paramPaymentId : generateRandomString(8)
+        const returnUri = 'http://localhost:3000/charge-return?payment_id='+paymentId
+        const res = await creditCard(100, response.id, returnUri, paymentId, currencyCode);
         alert("done Payment");
-        setPaymentResult(JSON.stringify(res.data, null, "\t"));
+        // console.log(res.data);
+        // console.log(res.data.return_uri);
+        // console.log(decodeURI(res.data.return_uri));
+        // setPaymentResult(JSON.stringify(res.data, null, "\t"));
+
+        if(paramDone != "" && !paramDone.includes('http')){
+          router.replace(paramDone)
+        }else{
+          router.replace(res.data.return_uri)
+        }
+
       }
     );
   }
@@ -79,9 +101,9 @@ export default function Page() {
           transactionInfo: {
             totalPriceStatus: 'FINAL',
             totalPriceLabel: 'Total',
-            totalPrice: '100.00',
-            currencyCode: 'JPY',
-            countryCode: 'JP',
+            totalPrice: amount,
+            currencyCode: currencyCode,
+            countryCode: countryCode,
           },
         }}
         onLoadPaymentData={paymentRequest => {
@@ -93,9 +115,7 @@ export default function Page() {
         //   console.log('event', event);
         // }}
       />
-      <br />
-      <h2>Payment Result</h2>
-      <pre>{paymentResult}</pre>
+      
     </main>
   );
 }

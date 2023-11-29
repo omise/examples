@@ -28,8 +28,8 @@ export const apiCharge = axios.create({
 
 export const useAPICreditCard = () => {
   const axios = useAxios();
-  return (amount: number, token: string, returnUri: string, paymentId: string): Promise<AxiosResponse<any>> =>
-    axios.post("api/credit-card", { amount, token, returnUri, paymentId });
+  return (amount: number, token: string, returnUri: string, paymentId: string, currency: string): Promise<AxiosResponse<any>> =>
+    axios.post("api/credit-card", { amount, token, returnUri, paymentId, currency });
 };
 
 export const useAPIChargeBySource = () => {

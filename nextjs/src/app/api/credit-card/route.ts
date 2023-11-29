@@ -12,22 +12,24 @@ interface CreditCardRequest {
   token: string;
   returnUri: string;
   paymentId: string;
+  currency: string;
 }
 
 export async function POST(request: Request) {
   const req: CreditCardRequest = await request.json();
   try {
+
     const charge = await omise.charges.create({
       description: new Date().toLocaleString(),
       amount: req.amount,
-      currency: "JPY",
+      currency: req.currency,
       card: req.token,
-      // return_uri: req.returnUri
+      return_uri: encodeURI(req.returnUri)
     });
+
     if (!charge) {
       return NextResponse.json("unknown error", { status: 500 });
     }
-
 
     if (charge.paid) {
 
@@ -36,7 +38,7 @@ export async function POST(request: Request) {
       await Payment.create({
         paymentId: req.paymentId,
         chageId: chargeId,
-        payment_type: "paypay",
+        payment_type: "creditCard",
         
       })
 

@@ -57,9 +57,9 @@ export default function Page() {
       // トークン作成完了
       async (_, response) => {
         const paymentId= generateRandomString(8)
-        const returnUri = 'http://localhost:3000/paypay-return?payment_id='+paymentId
+        const returnUri = 'http://localhost:3000/charge-return?payment_id='+paymentId
     
-        const res = await creditCard(1000, response.id, paymentId, returnUri);
+        const res = await creditCard(1000, response.id, paymentId, returnUri, "jpy");
         alert("Complete Payment");
         console.log(res);
         setPaymentResult(JSON.stringify(res.data, null, "\t"));

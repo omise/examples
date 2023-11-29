@@ -19,6 +19,8 @@ export async function POST(request: Request) {
   params.append('source[type]', 'paypay')
   params.append('return_uri', req.returnUri)
 
+  console.log(req.returnUri)
+
   try {
     
     const res = await apiCharge.post<any>(
