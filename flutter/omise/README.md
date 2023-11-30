@@ -59,7 +59,7 @@ Create Token```
 
     String strPubKey = dotenv.env['OMISE_PUB_KEY'] ?? "";
 
-    http.Response objToken = await Omise.createToken(strPubKey
+    http.Response objToken = await Omise.createCardToken(strPubKey
                                                       , strName  
                                                       , strCardNumber  
                                                       , expMonth  

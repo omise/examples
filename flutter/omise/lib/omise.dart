@@ -22,7 +22,7 @@ class Omise {
 
   Omise(this._omisePubKey);
 
-  Future<String> createToken({
+  Future<String> createCardToken({
     required String strName,
     required String strCardNumber,
     required String expMonth,

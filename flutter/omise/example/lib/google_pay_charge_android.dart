@@ -1,20 +1,12 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
-import 'package:example/util/util.dart';
 
 import 'package:example/environment.dart';
 import 'package:example/google_pay_config.dart';
-import 'package:example/charge_return.dart';
-
-import 'package:url_launcher/url_launcher.dart';
 
 import 'package:pay/pay.dart';
 
 import 'dart:convert' as convert;
 
-import 'payment_configuration.dart' as payment_configurations;
 
 const _paymentItems = [
   PaymentItem(
@@ -138,7 +130,7 @@ class _GooglePayChargeAndroidState extends State<GooglePayChargeAndroid> with Wi
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
               Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: FutureBuilder<PaymentConfiguration>(
                   future: _initGooglePayConfig(),
                   builder: (context, snapshot) => snapshot.hasData
