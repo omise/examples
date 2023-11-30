@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:example/credit_card_charge.dart';
 import 'package:example/paypay_charge.dart';
 import 'package:example/google_pay_charge.dart';
+import 'package:example/google_pay_charge_android.dart';
 
 enum TabItem {
   creditCard(
-    title: 'CreditCard Charge',
+    title: 'Credit Card Charge',
     icon: Icons.home,
     page: CreditCardCharge(title: 'Credit Card'),
   ),

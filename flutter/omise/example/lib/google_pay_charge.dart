@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:webview_flutter/webview_flutter.dart';
-// #docregion platform_imports
-// Import for Android features.
-import 'package:webview_flutter_android/webview_flutter_android.dart';
-// Import for iOS features.
-import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
+import 'package:example/util/util.dart';
+
+import 'package:example/environment.dart';
+import 'package:example/charge_return.dart';
+import 'package:example/google_pay_charge_android.dart';
+
+import 'package:url_launcher/url_launcher.dart';
+
 
 class GooglePayCharge extends StatefulWidget {
   const GooglePayCharge({super.key, required this.title});
@@ -25,148 +27,161 @@ class GooglePayCharge extends StatefulWidget {
   State<GooglePayCharge> createState() => _GooglePayChargeState();
 }
 
-class _GooglePayChargeState extends State<GooglePayCharge> {
+class _GooglePayChargeState extends State<GooglePayCharge> with WidgetsBindingObserver {
 
-  late final WebViewController _controller;
+  bool isLoading = false;
+  bool isDetailActive = false;
+
+  String _amount = "0";
+  String strPaymentId = "";
+
+  static String strApiHost =
+      (isAndroid ? Environment.apiHostAndroid : Environment.apiHost) ?? "";
+
 
   @override
   void initState() {
     super.initState();
-
-    // #docregion platform_features
-    late final PlatformWebViewControllerCreationParams params;
-    if (WebViewPlatform.instance is WebKitWebViewPlatform) {
-      params = WebKitWebViewControllerCreationParams(
-        allowsInlineMediaPlayback: true,
-        mediaTypesRequiringUserAction: const <PlaybackMediaTypes>{},
-      );
-    } else {
-      params = const PlatformWebViewControllerCreationParams();
-    }
-
-    final WebViewController controller =
-        WebViewController.fromPlatformCreationParams(params);
-    // #enddocregion platform_features
-
-    controller
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0x00000000))
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onProgress: (int progress) {
-            debugPrint('WebView is loading (progress : $progress%)');
-          },
-          onPageStarted: (String url) {
-            debugPrint('Page started loading: $url');
-          },
-          onPageFinished: (String url) {
-            debugPrint('Page finished loading: $url');
-          },
-          onWebResourceError: (WebResourceError error) {
-            debugPrint('''
-Page resource error:
-  code: ${error.errorCode}
-  description: ${error.description}
-  errorType: ${error.errorType}
-  isForMainFrame: ${error.isForMainFrame}
-          ''');
-          },
-          onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('https://www.youtube.com/')) {
-              debugPrint('blocking navigation to ${request.url}');
-              return NavigationDecision.prevent;
-            }
-            debugPrint('allowing navigation to ${request.url}');
-            return NavigationDecision.navigate;
-          },
-          onUrlChange: (UrlChange change) {
-            debugPrint('url change to ${change.url}');
-          },
-        ),
-      )
-      ..addJavaScriptChannel(
-        'Toaster',
-        onMessageReceived: (JavaScriptMessage message) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(message.message)),
-          );
-        },
-      )
-      ..loadRequest(Uri.parse('https://flutter.dev'));
-
-    // #docregion platform_features
-    if (controller.platform is AndroidWebViewController) {
-      AndroidWebViewController.enableDebugging(true);
-      (controller.platform as AndroidWebViewController)
-          .setMediaPlaybackRequiresUserGesture(false);
-    }
-    // #enddocregion platform_features
-
-    _controller = controller;
+    WidgetsBinding.instance.addObserver(this);
   }
 
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
-    @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.green,
-      appBar: AppBar(
-        title: Text(widget.title),
-        // This drop down menu demonstrates that Flutter widgets can be shown over the web view.
-        actions: <Widget>[
-          NavigationControls(webViewController: _controller),
-          // SampleMenu(webViewController: _controller),
-        ],
-      ),
-      body: WebViewWidget(controller: _controller),
-      
-    );
-
-  }  
-}  
-
-class NavigationControls extends StatelessWidget {
-  const NavigationControls({super.key, required this.webViewController});
-
-  final WebViewController webViewController;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () async {
-            if (await webViewController.canGoBack()) {
-              await webViewController.goBack();
-            } else {
-              if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('No back history item')),
-                );
-              }
-            }
-          },
+    
+    return Scaffold(
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(widget.title),
+      ),
+      body: Stack(
+        children: [
+          Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              Row(
+                children: [
+                  Container(
+                      padding: const EdgeInsets.all(20),
+                      child: const Text(
+                        'Amount',
+                        style: TextStyle(fontSize: 30),
+                      ),
+                  ),
+                  Container(
+                      padding: const EdgeInsets.all(20),
+                      width: 260,
+                      child: TextField(
+                          decoration: const InputDecoration(
+                            hintText: 'Input you need to pay'
+                          ),
+                          onChanged: (text) {
+                            // TODO: ここで取得したtextを使う
+                            _amount = text;
+                          }
+                        ),
+                  )
+                  
+                ],
+              ),
+              
+              Container(
+                  padding: EdgeInsets.all(20),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white, backgroundColor: Colors.orange,
+                    ),
+                    onPressed: () {
+                      if(isAndroid) {
+                        _goToGoolePayAndroid();
+                      }else{
+                        _sendGooglePayCharge();
+                      }
+                      
+                    },
+                    child: const Text('Google Pay Charge'),
+                  ),
+              ),
+              
+            ],
+          ),
         ),
-        IconButton(
-          icon: const Icon(Icons.arrow_forward_ios),
-          onPressed: () async {
-            if (await webViewController.canGoForward()) {
-              await webViewController.goForward();
-            } else {
-              if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('No forward history item')),
-                );
-              }
-            }
-          },
-        ),
-        IconButton(
-          icon: const Icon(Icons.replay),
-          onPressed: () => webViewController.reload(),
-        ),
-      ],
-    );
+        // Stack.
+        if (isLoading)
+          const ColoredBox(
+            color: Colors.black54,
+            child: Center(
+              // Default Indicator.
+              // https://api.flutter.dev/flutter/material/CircularProgressIndicator-class.html
+              child: CircularProgressIndicator(),
+            ),
+          )
+        ]
+      )
+    );  
   }
-}
+
+  void _goToGoolePayAndroid() {
+    Navigator.push<void>(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => GooglePayChargeAndroid(
+              title: "GooglePay Charge Android",
+              amount: _amount,
+          )),
+      );
+  }
+
+  Future<void> _sendGooglePayCharge() async {
+
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      strPaymentId = generateRandomString(10);
+      String strReturnUrl = "omise-flutter-sample://chargeReturn?payment_id=$strPaymentId";
+      String encoded = Uri.encodeComponent(strReturnUrl);
+      String googlePayUrl = strApiHost+"/google-payment?amount=$_amount&payment_id=$strPaymentId&done=$encoded&currency_code=JPY&country_code=JP";
+
+      Uri _url = Uri.parse(googlePayUrl);
+      if (!await launchUrl(_url, mode: LaunchMode.externalApplication)) {
+        throw Exception('Could not launch $_url');
+      }
+      setState(() {
+        isDetailActive = true;
+        isLoading = false;
+      });
+    } catch(e){
+      debugPrint(e.toString()); 
+      setState(() {
+        isLoading = false;
+      });
+      showTextDialog(context, "Failed Google Pay Charge");
+
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if(isDetailActive && state == AppLifecycleState.resumed){
+
+      Navigator.push<void>(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => ChargeReturn(
+              title: "Charge Return",
+              strPaymentId: strPaymentId,
+          )),
+      );
+    }
+  }
+}  
+
