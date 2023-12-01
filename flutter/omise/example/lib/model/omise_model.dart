@@ -63,7 +63,6 @@ class OmiseModel {
       strBillingName: strBillingName,
       strBillingStreet: strBillingStreet
     );
-    print(token);
     String requestUrl = "/api/credit-card";
     Map<String, String> chargeInfo = {
       "amount": strAmount,
