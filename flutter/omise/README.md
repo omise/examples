@@ -11,12 +11,14 @@ Opn Payments(Omise) is a PCI-certified payment gateway with an easy-to-use manag
 This contains also the following things.
 
 - Omise SDK for flutter
--- Creare Token
+-- Creare Token by Credit Card
+-- Creare Token by Tokenazation
 -- Create Source
 
 - Some examples by using Omise SDK
 -- Create Charge.
 -- Create PayPay Charge
+-- Create Google Payment Charge
 
 # Requirements
 To follow along, you will need:

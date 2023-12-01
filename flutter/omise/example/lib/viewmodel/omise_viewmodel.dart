@@ -17,10 +17,11 @@ class OmiseViewModel {
                             , String expMonth
                             , String expYear
                             , String securityCode
+                            , String strCurrency
                             , String strReturnUrl
                             , String strPaymentId
                               ) async{
-    http.Response objResponse = await OmiseModel.createCharge(intAmount, strName, strCardNumber, expMonth, expYear, securityCode, strReturnUrl, strPaymentId);
+    http.Response objResponse = await OmiseModel.createCharge(intAmount, strName, strCardNumber, expMonth, expYear, securityCode, strCurrency, strReturnUrl, strPaymentId);
     dicOmise = jsonDecode(objResponse.body);
                             
     return;
@@ -46,6 +47,14 @@ class OmiseViewModel {
 
     http.Response objResponse = await OmiseModel.fetchCharge(strPaymentId);
     dicOmise = jsonDecode(objResponse.body);
+    return;
+  }
+
+  Future<void> googlePayCharge(String strAmount, String strMethod, String strBillingName, String strBillingStreet,String strData, String strCurrency, String strReturnUrl,  String strPaymentId ) async{
+
+    http.Response objResponse = await OmiseModel.createTokenizationCharge(strAmount, strMethod, strData, strBillingName, strBillingStreet, strCurrency, strReturnUrl, strPaymentId);
+    dicOmise = jsonDecode(objResponse.body);
+    
     return;
   }
 

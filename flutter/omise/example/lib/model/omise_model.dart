@@ -19,6 +19,7 @@ class OmiseModel {
       String expMonth,
       String expYear,
       String securityCode,
+      String strCurrency,
       String strReturnUrl,
       String strPaymentId) async {
     String token = await _omise.createCardToken(
@@ -33,7 +34,43 @@ class OmiseModel {
       "amount": intAmount.toString(),
       "token": token,
       "returnUri": strReturnUrl,
-      "paymentId": strPaymentId
+      "paymentId": strPaymentId,
+      "currency": strCurrency
+    };
+
+    return await http.post(
+      Uri.parse(strApiHost + requestUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(chargeInfo),
+    );
+  }
+
+  static Future<http.Response> createTokenizationCharge(
+      String strAmount,
+      String strMethod,
+      String strData,
+      String strBillingName,
+      String strBillingStreet,
+      String strCurrency,
+      String strReturnUrl,
+      String strPaymentId
+      ) async {
+    String token = await _omise.createTokenizationToken(
+      strMethod: strMethod,
+      strData: strData,
+      strBillingName: strBillingName,
+      strBillingStreet: strBillingStreet
+    );
+    print(token);
+    String requestUrl = "/api/credit-card";
+    Map<String, String> chargeInfo = {
+      "amount": strAmount,
+      "token": token,
+      "returnUri": strReturnUrl,
+      "paymentId": strPaymentId,
+      "currency": strCurrency
     };
 
     return await http.post(

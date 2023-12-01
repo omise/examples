@@ -19,7 +19,7 @@ Replace the values for OMISE_PUB_KEY with your key. They can be found on your Om
 This example needs a backend API.
 This use this backend API.
 
-https://github.com/opn-ooo/omise_example_prroject/tree/master/nextjs
+https://github.com/omise/examples/tree/example/nextjs
 
 # Install library.
 

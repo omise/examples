@@ -129,6 +129,7 @@ class _CreditCardChargeState extends State<CreditCardCharge> with WidgetsBinding
               , _cardExpiredMonth
               , _cardExpiredYear
               , _cardSecurityCode
+              , "JPY"
               , strReturnUrl
               , strPaymentId
               );

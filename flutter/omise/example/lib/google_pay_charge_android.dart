@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 
+import 'package:example/util/util.dart';
+
 import 'package:example/environment.dart';
 import 'package:example/google_pay_config.dart';
+import 'package:example/viewmodel/omise_viewmodel.dart';
+import 'package:example/charge_return.dart';
 
 import 'package:pay/pay.dart';
 
 import 'dart:convert' as convert;
-
-
-const _paymentItems = [
-  PaymentItem(
-    label: 'Total',
-    amount: '99.99',
-    status: PaymentItemStatus.final_price,
-  )
-];
-
 
 class GooglePayChargeAndroid extends StatefulWidget {
   const GooglePayChargeAndroid({super.key, required this.title, required this.amount});
@@ -38,6 +32,12 @@ class GooglePayChargeAndroid extends StatefulWidget {
 
 class _GooglePayChargeAndroidState extends State<GooglePayChargeAndroid> with WidgetsBindingObserver {
 
+  late List<PaymentItem> _paymentItems;
+  bool isLoading = false;
+  bool isDetailActive = false;
+  String strPaymentId = "";
+
+  OmiseViewModel objViewModel = OmiseViewModel();
   
   @override
   void initState() {
@@ -96,7 +96,14 @@ class _GooglePayChargeAndroidState extends State<GooglePayChargeAndroid> with Wi
     
     final rootMap = root.toJson();
     final json = convert.json.encode(rootMap);
-    
+
+    _paymentItems = [
+      PaymentItem(
+        label: 'Total',
+        amount: widget.amount,
+        status: PaymentItemStatus.final_price,
+      )
+    ];
     return PaymentConfiguration.fromJsonString(json);
   }
 
@@ -107,11 +114,43 @@ class _GooglePayChargeAndroidState extends State<GooglePayChargeAndroid> with Wi
     super.dispose();
   }
 
-  void onGooglePayResult(paymentResult) {
-    print(paymentResult);
-    print(paymentResult["paymentMethodData"]);
-    print(paymentResult["paymentMethodData"]["tokenizationData"]);
-    print(paymentResult["paymentMethodData"]["tokenizationData"]["token"]);
+  Future<void> onGooglePayResult(paymentResult) async{
+    strPaymentId = generateRandomString(10);
+    // String strReturnUrl = "omise-flutter-sample://chargeReturn?payment_id=$strPaymentId";
+    String strReturnUrl = "https://opn.ooo";
+
+    String strData = paymentResult["paymentMethodData"]["tokenizationData"]["token"];
+
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      await objViewModel.googlePayCharge(widget.amount, "googlepay", "GooglePayTest", "GooglePayStreet", strData, "JPY", strReturnUrl, strPaymentId);
+
+      if (!context.mounted) return;
+
+      setState(() {
+        isDetailActive = true;
+        isLoading = false;
+      });
+
+      _goToChargeReturn();
+
+    } catch(e){
+      debugPrint(e.toString()); 
+      setState(() {
+        isLoading = false;
+      });
+      showTextDialog(context, "Failed PayPay Charge");
+
+    }
+  }
+
+  void onGooglePayError(Object? error) {
+    print(error);
+    String errStr = error.toString();
+    showTextDialog(context, errStr);
   }
 
   @override
@@ -140,6 +179,7 @@ class _GooglePayChargeAndroidState extends State<GooglePayChargeAndroid> with Wi
                           type: GooglePayButtonType.buy,
                           margin: const EdgeInsets.only(top: 15.0),
                           onPaymentResult: onGooglePayResult,
+                          onError: onGooglePayError,
                           loadingIndicator: const Center(
                             child: CircularProgressIndicator(),
                           ),
@@ -151,20 +191,30 @@ class _GooglePayChargeAndroidState extends State<GooglePayChargeAndroid> with Wi
           ),
         ),
         // Stack.
-        // if (isLoading)
-        //   const ColoredBox(
-        //     color: Colors.black54,
-        //     child: Center(
-        //       // Default Indicator.
-        //       // https://api.flutter.dev/flutter/material/CircularProgressIndicator-class.html
-        //       child: CircularProgressIndicator(),
-        //     ),
-        //   )
+        if (isLoading)
+          const ColoredBox(
+            color: Colors.black54,
+            child: Center(
+              // Default Indicator.
+              // https://api.flutter.dev/flutter/material/CircularProgressIndicator-class.html
+              child: CircularProgressIndicator(),
+            ),
+          )
         ]
       )
     );  
   }
 
-  
+  void _goToChargeReturn(){
+
+    Navigator.push<void>(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => ChargeReturn(
+              title: "Charge Return",
+              strPaymentId: strPaymentId,
+          )),
+      );
+  }
 }  
 
