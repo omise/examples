@@ -1,0 +1,13 @@
+//
+//  debug.xcconfig
+//  OpnPaymentExample
+//
+//  Created by Shunsuke Hiratsuka on 2023/11/22.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+OMISE_PUB_KEY = "pkey_test_5ss3oz070fptw3tnjny"
+API_HOST = http:/$()/$()localhost:3000
+GOOGLE_PAYMENT_URL = http:/$()/$()localhost:3000/$()google-payment

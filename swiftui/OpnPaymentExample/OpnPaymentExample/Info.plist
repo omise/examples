@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>urlscheme</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>omise-sample</string>
+			</array>
+		</dict>
+	</array>
+	<key>OMISE_PUB_KEY</key>
+	<string>${OMISE_PUB_KEY}</string>
+	<key>API_HOST</key>
+	<string>${API_HOST}</string>
+</dict>
+</plist>
