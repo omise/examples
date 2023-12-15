@@ -1,0 +1,141 @@
+<div id="credit-card">
+Credit Card Charge(Manual):
+<form>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+Amount:<input type="number" name="money"><br />
+Name:<input type="text" name="name"><br />
+Card Number:<input type="text" name="card_number" placeholder="4242 4242 4242 4242" style="width: 200px;"><br />
+Security Code:<input type="text" name="security_code" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="333"><br />
+Expiration Month:<input type="text" name="expired_month" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="09"><br />
+Expiration Year:<input type="text" name="expired_year" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="2025"><br />
+<input type="button" value="Pay" onclick="createToken()">
+</form>
+<form method=POST action="/create_charge" id="creditCardCharge" >
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+<input type="hidden" name="amount" id="credit_card_amount" value="" />
+<input type="hidden" name="token" id="token" value="" />
+</form>
+</div>
+<hr />
+<div id="credit-card-opnpayment">
+Credit Card Charge(Omise PreBuild Form):
+<form method=POST action="/create_charge_omise">
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+<script type="text/javascript" src="https://cdn.omise.co/omise.js"
+          data-key="<%= Rails.configuration.omise_pub_key %>"
+          data-amount="100"
+          data-currency="JPY"
+          data-default-payment-method="credit_card">
+  </script>
+</form>
+</div>
+<hr />
+<div id="credit-card-opnpayment">
+Credit Card Charge(Omise PreBuild Form another):
+
+<form id="checkoutForm" method="POST" action="/create_charge_omise_another">
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+Amount:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="100"> <br />
+
+  <input type="hidden" name="omiseToken">
+  <input type="hidden" name="omiseSource">
+  <button type="submit" id="checkoutButton">Checkout</button>
+</form>
+</div>
+<hr />
+
+
+<div id="paypay">
+PayPay Charge(Create Source and Charge at the same time):
+<form method=POST action="/paypay_charge">
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+Amount:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="100"> <br />
+<input type="submit" value="Pay">
+</form>
+</div>
+<hr />
+<div id="paypay-another">
+PayPay Charge(Create source, then Create Charge):
+<form method=POST action="/paypay_charge_another">
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+Amount:<input type="text" name="money" id="payment_amount" oninput="value = value.replace(/[^0-9]+/i,'');" placeholder="100"> <br />
+<input type="submit" value="Pay">
+</form>
+</div>
+<hr />
+<div id="googlepay">
+Google Pay:
+<form method=POST action="/google_charge" id="google_pay_form">
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+<input type="hidden" name="card_id" id="card_id" value="" />
+</form>
+</div> 
+
+<script>
+OmiseCard.configure({
+  publicKey: "<%= Rails.configuration.omise_pub_key %>"
+});
+
+var button = document.querySelector("#checkoutButton");
+var form = document.querySelector("#checkoutForm");
+var money = document.querySelector("#payment_amount").value;
+
+button.addEventListener("click", (event) => {
+  event.preventDefault();
+  OmiseCard.open({
+    amount: money,
+    currency: "JPY",
+    defaultPaymentMethod: "credit_card",
+    onCreateTokenSuccess: (nonce) => {
+        if (nonce.startsWith("tokn_")) {
+            form.omiseToken.value = nonce;
+        } else {
+            form.omiseSource.value = nonce;
+        };
+      form.submit();
+    }
+  });
+});
+const ccInput = document.querySelector('[name="card_number"]');
+ccInput.addEventListener("input", inputCreditCard);
+
+function inputCreditCard(e) {
+    // console.log(e.target.value);
+    var v = e.target.value;
+    v = v.replace(/[^0-9 ]+/i,'');
+    if(v.length == 4 || v.length == 9 || v.length == 14){
+      v = v + ' ';
+    }
+    e.target.value = v;
+}
+
+function createToken() {
+  var cardNumber = document.querySelector('[name="card_number"]').value;
+  var name = document.querySelector('[name="name"]').value;
+  var money = document.querySelector('[name="money"]').value;
+  var securityCode = document.querySelector('[name="security_code"]').value;
+  var expiredMonth = document.querySelector('[name="expired_month"]').value;
+  var expiredYear = document.querySelector('[name="expired_year"]').value;
+
+  var form = document.querySelector("#creditCardCharge");
+
+  Omise.setPublicKey("<%= Rails.configuration.omise_pub_key %>");
+  Omise.createToken("card",
+  {
+    "expiration_month": expiredMonth,
+    "expiration_year": expiredYear,
+    "name": name,
+    "number": cardNumber.trim(),
+    "security_code": securityCode,
+  },
+  function(statusCode, response) {
+    // console.log(response["id"])
+
+    document.querySelector('[name="amount"]').value = money;
+    document.querySelector('[name="token"]').value = response["id"];
+
+    form.submit();
+  });
+}  
+</script>
