@@ -31,7 +31,6 @@ class ChargeController extends Controller
             'card' => $req->token
         ]);
 
-        // print_r($charge);
         $this->savePaymentInfo($strPaymentId, $charge['id'], 'credit_card');
 
         return view('charge-result', ['charge'=>$charge]);
@@ -51,7 +50,6 @@ class ChargeController extends Controller
             'card' => $req->omiseToken
         ]);
 
-        // print_r($charge);
         $this->savePaymentInfo($strPaymentId, $charge['id'], 'credit_card');
 
 
@@ -95,7 +93,6 @@ class ChargeController extends Controller
 
         $postInput = [
             'amount' => $req->money,
-            // 'tokenization[data]' => urlencoe($req->token),
             'currency' => 'JPY',
             'return_uri' => config('app.url').'/charge_return?payment_id='.$strPaymentId,
             'source[type]' => "paypay"
@@ -127,10 +124,6 @@ class ChargeController extends Controller
         ]);    
 
 
-        // $apiURL = 'https://api.omise.co/charges';
-
-        // $encoded = base64_encode(env('OMISE_SECRET_KEY') . ':' );
-
         $strPaymentId = $this->random(9);
 
         
@@ -141,8 +134,6 @@ class ChargeController extends Controller
             'return_uri' => config('app.url').'/charge_return?payment_id='.$strPaymentId,
         ]);
 
-
-        // print_r($charge);
 
         $this->savePaymentInfo($strPaymentId, $charge['id'], 'paypay');
 
