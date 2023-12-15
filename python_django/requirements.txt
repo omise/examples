@@ -1,0 +1,5 @@
+django
+omise
+django-environ
+mysqlclient
+django-settings-export
