@@ -37,6 +37,7 @@ dependencies:
   uni_links: #latest
   url_launcher: #latest
   flutter_hooks: ^0.18.5+1
+  pay: #latest
   omise:
     path: ../
 

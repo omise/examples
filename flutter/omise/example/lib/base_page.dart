@@ -6,7 +6,7 @@ import 'package:example/enum/tab_item.dart';
 final _navigatorKeys = <TabItem, GlobalKey<NavigatorState>>{
   TabItem.creditCard: GlobalKey<NavigatorState>(),
   TabItem.paypay: GlobalKey<NavigatorState>(),
-  // TabItem.googlePay: GlobalKey<NavigatorState>(),
+  TabItem.googlePay: GlobalKey<NavigatorState>(),
 };
 
 

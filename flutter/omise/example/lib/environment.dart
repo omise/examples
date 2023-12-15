@@ -3,9 +3,12 @@ class Environment {
         'OMISE_PUB_KEY',
       );
   static String? get apiHostAndroid => const String.fromEnvironment(
-        'API_HOST_ANDROID',
+        'APP_HOST_ANDROID',
       );
   static String? get apiHost => const String.fromEnvironment(
-        'API_HOST',
+        'APP_HOST',
+      );
+  static String? get googlePayEnvironment => const String.fromEnvironment(
+        'GOOGLE_PAY_ENV',
       );
 }

@@ -22,7 +22,7 @@ class Omise {
 
   Omise(this._omisePubKey);
 
-  Future<String> createToken({
+  Future<String> createCardToken({
     required String strName,
     required String strCardNumber,
     required String expMonth,
@@ -47,6 +47,48 @@ class Omise {
           'authorization': basicAuth,
         },
         body: cardInfo,
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> tokenData = jsonDecode(response.body);
+        return tokenData['id'] as String;
+      } else {
+        throw OmiseError(
+            "Failed to create token. Status code: ${response.statusCode}");
+      }
+    } catch (error) {
+      if (error is OmiseError) {
+        rethrow;
+      } else {
+        throw OmiseError(error);
+      }
+    }
+  }
+
+  Future<String> createTokenizationToken({
+    required String strMethod,
+    required String strData,
+    required String strBillingName,
+    required String strBillingStreet,
+  }) async {
+    try {
+      final requestTokenUrl = Uri.parse("$_vaultUrl/tokens");
+      final basicAuth = _getBasicAuth();
+
+      final Map<String, String> tokenInfo = {
+        "tokenization[method]": strMethod,
+        "tokenization[data]": strData,
+        "tokenization[billing_name]": strBillingName,
+        "tokenization[billing_street1]": strBillingStreet,
+        
+      };
+
+      final response = await http.post(
+        requestTokenUrl,
+        headers: <String, String>{
+          'authorization': basicAuth,
+        },
+        body: tokenInfo,
       );
 
       if (response.statusCode == 200) {

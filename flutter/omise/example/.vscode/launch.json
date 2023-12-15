@@ -10,8 +10,9 @@
       "type": "dart",
       "args": [
         "--dart-define=OMISE_PUB_KEY=pkey_123",
-        "--dart-define=API_HOST_ANDROID=http://10.0.2.2",
-        "--dart-define=API_HOST=http://localhost"
+        "--dart-define=APP_HOST_ANDROID=http://10.0.2.2",
+        "--dart-define=APP_HOST=http://localhost",
+        "--dart-define=GOOGLE_PAY_ENV=TEST"
       ]
     },
     {
@@ -21,8 +22,9 @@
       "flutterMode": "profile",
       "args": [
         "--dart-define=OMISE_PUB_KEY=pkey_123",
-        "--dart-define=API_HOST_ANDROID=http://10.0.2.2",
-        "--dart-define=API_HOST=http://localhost"
+        "--dart-define=APP_HOST_ANDROID=http://10.0.2.2",
+        "--dart-define=APP_HOST=http://localhost",
+        "--dart-define=GOOGLE_PAY_ENV=TEST"
       ]
     },
     {
@@ -32,8 +34,9 @@
       "flutterMode": "release",
       "args": [
         "--dart-define=OMISE_PUB_KEY=pkey_123",
-        "--dart-define=API_HOST_ANDROID=http://10.0.2.2",
-        "--dart-define=API_HOST=http://localhost"
+        "--dart-define=APP_HOST_ANDROID=http://10.0.2.2",
+        "--dart-define=APP_HOST=http://localhost",
+        "--dart-define=GOOGLE_PAY_ENV=TEST"
       ]
     }
   ]

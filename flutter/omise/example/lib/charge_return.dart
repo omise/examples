@@ -106,7 +106,7 @@ class _ChargeReturnState extends State<ChargeReturn> {
     } catch(e){
       debugPrint(e.toString()); 
       
-      showTextDialog(context, "Failed Credit Card Charge");
+      showTextDialog(context, "Failed to get Card Charge Infos");
 
     }finally{
       setState(() {
