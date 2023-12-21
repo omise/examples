@@ -12,12 +12,12 @@ A demo store using Spree and the Omise-ActiveMerchant plugin.
 
 ### Java
 
-Example Java server receiving token generated using
-[Omise.js](https://docs.opn.ooo/omise-js) and then creating a
-[`Customer`](https://docs.opn.ooo/customers-api) object and charging it.
+Example Java server to receive the token generated using
+[Omise.js](https://docs.opn.ooo/omise-js), and then create a
+[`Customer`](https://docs.opn.ooo/customers-api) object and charge it.
 
 ### ASP.NET Web Forms
 
-Example ASP.NET Web Forms integration, with two pages. One using
-[Omise.js](https://docs.opn.ooo/omise-js) for a customer to enter credit card details, another to
-receive the form and charge the token.
+Example ASP.NET Web Forms integration, with two pages. One uses
+[Omise.js](https://docs.opn.ooo/omise-js) for a customer to enter credit card details, and the other
+receives the form and charges the token.
